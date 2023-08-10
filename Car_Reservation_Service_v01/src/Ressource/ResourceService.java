@@ -2,7 +2,10 @@ package Ressource;
 
 public class ResourceService {
 	
-	public void getSelectedResource() {
+	public Ressource getSelectedResource() {
+		
+		Ressource ressource = Decorator.addRessource();
+		return ressource;
 		
 	}
 
