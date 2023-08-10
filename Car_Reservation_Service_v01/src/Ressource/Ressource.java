@@ -6,14 +6,12 @@ public interface Ressource {
 	 * mit dem Use Case „getSelectedResource“ des „ResourceService“ sowie den
 	 * Fachtypen “Resource”, “Car”, „SetTopBox“ und „ChildSeat“. 
 	 * Verwenden Sie zur Realisierung das Entwurfsmuster „Decorator“.
+	 * 
+	 * Credit: https://www.baeldung.com/java-decorator-pattern
 	 */
 	
-	public static void setRessource() {
+	Ressource setRessource();
+	Ressource addRessource();
+	Ressource getRessource();
 		
-	}
-	
-	public static Ressource getRessource() {
-		return null;		
-	}
-
 }

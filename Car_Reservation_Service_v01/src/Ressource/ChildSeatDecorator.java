@@ -2,8 +2,19 @@ package Ressource;
 
 public class ChildSeatDecorator extends Decorator {
 
+	//explicit constructor
+	public ChildSeatDecorator() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Ressource addRessource() {
-		Ressource ChildSeat = null;
-		return ChildSeat;
+		return addChildSeat();
+	}
+
+	private Ressource addChildSeat() {
+		Ressource childSeat = null;
+		// TODO Auto-generated method stub
+		return childSeat;
 	}
 }
