@@ -57,7 +57,7 @@ public class NaturalUser extends Subject {
     }	
 		
 	public void executeCredentialType(Person person)
-	//switch case to get number 1 to 4 from CLI by Scanner
+	//switch case to get number 1 to 4 from comand line interface by Scanner
 	
 	{		
 		int credentialType = getCredentialType(); 
