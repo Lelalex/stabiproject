@@ -16,7 +16,7 @@ public class AuthenticationService {
     private boolean isAuthenticated;
 	
     public String authenticationService() {
-	// Implement the method
+	// Implement the method, that is needed here
         return null;
     }
 
