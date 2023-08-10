@@ -3,6 +3,8 @@ package Authentication;
 import Person.Person;
 import java.util.Scanner;
 
+import Database.db;
+
 public class NaturalUser extends Subject {
 	private boolean authenticationPossible;
 	private AuthenticationService authenticationservice;
