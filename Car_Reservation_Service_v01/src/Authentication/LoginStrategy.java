@@ -2,7 +2,7 @@ package Authentication;
 
 import Person.Person;
 
-public interface LoginCredentialStrategy {
+public interface LoginStrategy {
 	
 	// enterID() -> für alle Optionen wird ID abgefragt, damit wir die Person zuordnen können
 	

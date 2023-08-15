@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import Person.Person;
 
-public class PasswordStrategy implements LoginCredentialStrategy {
+public class PasswordStrategy implements LoginStrategy {
 
 	@Override
 	public boolean runStrategy(Person person) {

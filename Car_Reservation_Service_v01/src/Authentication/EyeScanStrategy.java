@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import Person.Person;
 
-public class EyeScanStrategy implements LoginCredentialStrategy {
+public class EyeScanStrategy implements LoginStrategy {
 
 
 	@Override
