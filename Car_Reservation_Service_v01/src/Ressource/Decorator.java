@@ -2,21 +2,48 @@ package Ressource;
 
 public abstract class Decorator implements Ressource {
 	
-	private Ressource ressource;
+	public Ressource car;
 	
 	public int ressourcecount = 0;
 	
-	public Ressource addRessource() {
-		ressourcecount++;
-		return ressource.addRessource();
+	//constructor
+	public Decorator() {
+		
 	}
 	
-	public Ressource getRessource() {
-		return ressource.getRessource();
+	public int addRessource() {
+		return ressourcecount;
 	}
 	
+	
+	@Override
 	public Ressource setRessource() {
-		return ressource.setRessource();
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Ressource getRessource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Double getPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getBrand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLicense() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

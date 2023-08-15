@@ -8,13 +8,14 @@ public class SetTopBoxDecorator extends Decorator {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ressource addRessource() {
-		return addSetTopBox();
+	public int addRessource() {
+		ressourcecount++;
+		return ressourcecount;
 	}
 
-	private Ressource addSetTopBox() {
-		Ressource SetTopBox = null;
-		// TODO Auto-generated method stub
-		return SetTopBox;
-	}
+//	private Ressource addSetTopBox() {
+//		Ressource SetTopBox = null;
+//		// TODO Auto-generated method stub
+//		return SetTopBox;
+//	}
 }

@@ -11,7 +11,9 @@ public interface Ressource {
 	 */
 	
 	Ressource setRessource();
-	Ressource addRessource();
 	Ressource getRessource();
+	Double getPrice();
+	String getBrand();
+	String getLicense();
 		
 }
