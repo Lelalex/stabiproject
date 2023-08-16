@@ -3,8 +3,8 @@ package Ressource;
 public class SetTopBoxDecorator extends Decorator {
 	
 	//explicit constructor
-	public SetTopBoxDecorator() {
-		super();
+	public SetTopBoxDecorator(Ressource decorator) {
+		super(decorator);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -12,6 +12,16 @@ public class SetTopBoxDecorator extends Decorator {
 		ressourcecount++;
 		return ressourcecount;
 	}
+	
+    @Override
+    public String getDescription() {
+        return car.getDescription() + ", Set Topbox";
+    }
+
+    @Override
+    public Double getCost() {
+        return car.getCost() + 10.0;
+    }
 
 //	private Ressource addSetTopBox() {
 //		Ressource SetTopBox = null;

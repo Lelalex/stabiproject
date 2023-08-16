@@ -5,8 +5,8 @@ public class ChildSeatDecorator extends Decorator {
 	private String size;
 
 	//explicit constructor
-	public ChildSeatDecorator() {
-		super();
+	public ChildSeatDecorator(Ressource decorator) {
+		super(decorator);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -15,10 +15,14 @@ public class ChildSeatDecorator extends Decorator {
 		return ressourcecount;
 	}
 	
+    @Override
+    public String getDescription() {
+        return car.getDescription() + ", Child Seat";
+    }
+    
 	@Override
-	public Double getPrice() {
-		// TODO Auto-generated method stub
-		return null;
+	public Double getCost() {
+		return car.getCost() + 10.0;
 	}
 	
 	public String getSize() {

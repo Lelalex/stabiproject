@@ -2,13 +2,13 @@ package Ressource;
 
 public abstract class Decorator implements Ressource {
 	
-	public Ressource car;
+	protected Ressource car;
 	
 	public int ressourcecount = 0;
 	
 	//constructor
-	public Decorator() {
-		
+	public Decorator(Ressource car) {
+		this.car = car;	
 	}
 	
 	public int addRessource() {
@@ -29,7 +29,7 @@ public abstract class Decorator implements Ressource {
 	}
 
 	@Override
-	public Double getPrice() {
+	public Double getCost() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,6 +42,11 @@ public abstract class Decorator implements Ressource {
 
 	@Override
 	public String getLicense() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getDescription() {
 		// TODO Auto-generated method stub
 		return null;
 	}

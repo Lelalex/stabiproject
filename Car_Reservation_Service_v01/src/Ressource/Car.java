@@ -31,7 +31,13 @@ public class Car implements Ressource{
 	}
 
 	@Override
-	public Double getPrice() {
+	public Double getCost() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription() {
 		// TODO Auto-generated method stub
 		return null;
 	}
