@@ -1,32 +1,45 @@
 package Booking;
 
-public class BookingBuilder {
-    private String head;
-    private String body;
-    private String footer;
+import Person.Person;
 
-    public BookingBuilder setHead(String head) {
-        this.head = head;
-        return this;
-    }
-
-    public BookingBuilder setBody(String body) {
-        this.body = body;
-        return this;
-    }
-
-    public BookingBuilder setFooter(String footer) {
-        this.footer = footer;
-        return this;
-    }
-
-//    public GermanBooking buildGermanBooking() {
-//        return new GermanBooking(head, body, footer);
-//    }
+//public abstract class Builder {
 //
-//    public Booking buildEnglishBooking() {
-//        return new EnglishBooking(head, body, footer);
-//    }
+//	public void buildHead() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	public void buildBody() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	public void buildFooter() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	protected abstract Booking buildBooking();
+//
+//}
 
-	
-}
+public abstract class BookingBuilder 
+{
+    protected Person person; 
+    protected CarConfiguration car;
+    protected int duration;
+    protected String startDay; 
+    public Builder builder; 
+
+    public BookingBuilder(Person person, CarConfiguration car, int duration, String startDay) 
+    {
+        this.person = person; 
+        this.car = car; 
+        this.duration = duration; 
+        this.startDay = startDay; 
+    }
+
+    protected abstract void buildHead();
+    protected abstract void buildBody(); 
+    protected abstract void buildFooter();
+    protected abstract Booking buildBooking();

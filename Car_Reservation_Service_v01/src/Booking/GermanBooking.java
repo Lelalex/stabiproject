@@ -1,23 +1,72 @@
 package Booking;
 
 
-public class GermanBooking implements Booking {
-    private String head;
-    private String body;
-    private String footer;
 
-    public GermanBooking(String head, String body, String footer) {
+public class GermanBooking extends Booking
+{
+    private Head head = new Head();
+    private Body body = new Body();
+    private Footer footer = new Footer();
+
+
+
+    @Override
+    public void setHead(Head head) 
+    {
         this.head = head;
+
+    }
+
+    @Override
+    public void setBody(Body body) 
+    {
         this.body = body;
+    }
+
+    @Override
+    public void setFooter(Footer footer) 
+    {
         this.footer = footer;
     }
 
     @Override
-    public String getHead() { return head; }
+    public Head getHead() {
+            return this.head;
+        }
 
     @Override
-    public String getBody() { return body; }
+    public Body getBody() {
+        return this.body;
+    }
 
     @Override
-    public String getFooter() { return footer; }
-}
+    public Footer getFooter() {
+        return this.footer;
+    }
+
+    @Override
+    public double getPrice() {
+        return footer.getPrice();
+    }
+    }
+
+//public class GermanBooking extends Booking {
+//    private String head;
+//    private String body;
+//    private String footer;
+//
+//    public GermanBooking(String head, String body, String footer) {
+//        this.head = head;
+//        this.body = body;
+//        this.footer = footer;
+//    }
+//
+//    @Override
+//    public String getHead() { return head; }
+//
+//    @Override
+//    public String getBody() { return body; }
+//
+//    @Override
+//    public String getFooter() { return footer; }
+//}
