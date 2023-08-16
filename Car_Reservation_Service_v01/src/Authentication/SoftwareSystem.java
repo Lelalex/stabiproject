@@ -1,25 +1,5 @@
 package Authentication;
 
-//import Person.Person;
-//
-//public class SoftwareSystem {
-//	
-//	public void executeCredentialType(Person person) {
-//		if(PasswordStrategy.runStrategy(person))
-//	{
-//	authentication.setAuthenticated(true);
-//	//notification.getSuccessNotification();
-//	}
-//	else 	
-//	{
-//		System.out.println("Username or password is wrong!");
-//		executeCredentialType(person);
-//		return; }
-//	}
-//
-//}
-
-
 import Person.Person;
 
 public class SoftwareSystem {
@@ -35,7 +15,6 @@ public class SoftwareSystem {
 
         if(passwordStrategy.runStrategy(person)) {
             authenticationservice.setAuthenticated(true);
-            //notification.getSuccessNotification();
         }
         else {
             System.out.println("Username or password is wrong!");

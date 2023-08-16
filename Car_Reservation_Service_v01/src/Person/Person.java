@@ -19,4 +19,8 @@ public abstract class Person {
         System.out.println("ID: " + id);
         address.printAddress();
     }
+
+	public void setID(int personID) {
+		
+	}
 }

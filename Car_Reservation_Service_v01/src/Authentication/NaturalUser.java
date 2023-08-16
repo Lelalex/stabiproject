@@ -1,42 +1,78 @@
+//package Authentication;
+//
+//import java.util.Scanner;
+//
+//import Person.Person;
+//
+//import Database.DataBase;
+//
+//public class NaturalUser extends Subject {
+//
+//	private DataBase DataBase = DataBase.getEntry();
+//	
+//	private boolean authenticationPossible;
+//	private AuthenticationService authenticationservice;
+//
+//	private PasswordStrategy password = new PasswordStrategy();
+//	private FingerPrintStrategy fingerprint = new FingerPrintStrategy();
+//	private EyeScanStrategy eyescan = new EyeScanStrategy();
+//
+//	public boolean isAuthenticationPossible() {
+//		return authenticationPossible;
+//	}
+//
+//	public void setAuthenticationPossible(boolean authenticationPossible) {
+//		this.authenticationPossible = authenticationPossible;
+//	}
+//
+//	@Override
+//	// insert concrete implementation to auth. natuser and save to DB
+//	public void authenticateSubject() {
+//		int id = this.getId();
+//		checkID(id);
+//		if (authenticationPossible == true) {
+//			authenticationservice.setPerson(DataBase.getPerson(id));
+//			chooseCredentialType(authenticationservice.getPerson());
+//			DataBase.saveAuthentication(authenticationservice);
+//		}
+//	}
 package Authentication;
 
 import java.util.Scanner;
-
 import Person.Person;
-
 import Database.DataBase;
 
 public class NaturalUser extends Subject {
+    
+    private DataBase DataBase; // Felddeklaration
+    private boolean authenticationPossible;
+    private AuthenticationService authenticationservice;
+    private PasswordStrategy password = new PasswordStrategy();
+    private FingerPrintStrategy fingerprint = new FingerPrintStrategy();
+    private EyeScanStrategy eyescan = new EyeScanStrategy();
 
-	private DataBase DataBase = DataBase.getEntry();
-	
-	private boolean authenticationPossible;
-	private AuthenticationService authenticationservice;
+    public NaturalUser() {
+        DataBase = DataBase.getInstance(); // Initialisierung im Konstruktor
+    }
 
-	private PasswordStrategy password = new PasswordStrategy();
-	private FingerPrintStrategy fingerprint = new FingerPrintStrategy();
-	private EyeScanStrategy eyescan = new EyeScanStrategy();
+    public boolean isAuthenticationPossible() {
+        return authenticationPossible;
+    }
 
-	public boolean isAuthenticationPossible() {
-		return authenticationPossible;
-	}
+    public void setAuthenticationPossible(boolean authenticationPossible) {
+        this.authenticationPossible = authenticationPossible;
+    }
 
-	public void setAuthenticationPossible(boolean authenticationPossible) {
-		this.authenticationPossible = authenticationPossible;
-	}
-
-	@Override
-	// insert concrete implementation to auth. natuser and save to DB
-	public void authenticateSubject() {
-		int id = this.getId();
-		checkID(id);
-		if (authenticationPossible == true) {
-			authenticationservice.setPerson(DataBase.getPerson(id));
-			chooseCredentialType(authenticationservice.getPerson());
-			DataBase.saveAuthentication(authenticationservice);
-		}
-	}
-
+    @Override
+    public void authenticateSubject() {
+        int id = this.getId();
+        checkID(id);
+        if (authenticationPossible) {
+            authenticationservice.setPerson(DataBase.getPerson(id));
+            chooseCredentialType(authenticationservice.getPerson());
+            DataBase.saveAuthentication(authenticationservice);
+        }
+    }
 	public void checkID(int id) {
 		// check Input PersonID via COnsole and check for not null
 		// set boolean true/false after check of Person ID
