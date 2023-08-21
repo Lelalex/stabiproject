@@ -2,27 +2,24 @@ package Booking;
 
 public class Director {
 
+	private BookingBuilder bookingBuilder;
 
-private Builder builder;
+	public void setBuilder(BookingBuilder bookingBuilder) {
+		this.bookingBuilder = bookingBuilder;
+	}
 
-public void setBuilder(Builder builder) 
-{
-	this.builder = builder; 
-}
+	public BookingBuilder getBuilder() {
+		return this.bookingBuilder;
+	}
 
-public Builder getBuilder() {
-	return this.builder; 
-}
-
-
-//Buchungsteile (Kopf, Rumpf und Fuß) werden zusammen geführt
-public Booking createBooking() // = director
-{
-	this.builder.buildHead();
-	this.builder.buildBody();
-	this.builder.buildFooter();
-	Booking booking = builder.buildBooking();
-	return booking; 
-}
+	// director creates booking
+	public Booking createBooking() 
+	{
+		this.bookingBuilder.buildHead();
+		this.bookingBuilder.buildBody();
+		this.bookingBuilder.buildFooter();
+		Booking booking = bookingBuilder.buildBooking();
+		return booking;
+	}
 
 }

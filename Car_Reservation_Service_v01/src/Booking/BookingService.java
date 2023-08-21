@@ -2,13 +2,13 @@ package Booking;
 
 public class BookingService {
     public void createBooking() {
-        BookingBuilder builder = new BookingBuilder();
-        Booking germanBooking = builder.setHead("Kopf")
+        BookingBuilder bookingBuilder = new BookingBuilder();
+        Booking germanBooking = bookingBuilder.setHead("Kopf")
                                        .setBody("Körper")
                                        .setFooter("Fußzeile")
                                        .buildGermanBooking();
 
-        Booking englishBooking = builder.setHead("Header")
+        Booking englishBooking = bookingBuilder.setHead("Header")
                                         .setBody("Body")
                                         .setFooter("Footer")
                                         .buildEnglishBooking();
