@@ -9,12 +9,13 @@ public class Head {
 	private String email;
 	
 	public Head() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
-	public Head getHead() {
-		return this;
-	}
+//	public Head getHead() {
+//		return this;
+//	}
+	
 	public void printHead () {
 		System.out.println(this.name);
 		address.printAddress;
@@ -22,7 +23,9 @@ public class Head {
 	}
 	
 	public void setHead (String name, Address address, String email) {
-		
+		this.name = name;
+		this.address = address;
+		this.email = email;
 	}
 
 }
