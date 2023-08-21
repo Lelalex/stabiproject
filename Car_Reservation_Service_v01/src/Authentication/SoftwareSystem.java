@@ -4,14 +4,14 @@ import Person.Person;
 
 public class SoftwareSystem {
     
-    private AuthenticationService authenticationservice;  // assuming that Authentication is a class you have defined elsewhere
+    private AuthenticationService authenticationservice;  
 
     public SoftwareSystem() {
-        this.authenticationservice = new AuthenticationService();  // you might need to pass some arguments depending on the constructor of Authentication class
+        this.authenticationservice = new AuthenticationService();  
     }
 
     public void executeCredentialType(Person person) {
-        PasswordStrategy passwordStrategy = new PasswordStrategy();  // create an object of PasswordStrategy
+        PasswordStrategy passwordStrategy = new PasswordStrategy();  
 
         if(passwordStrategy.runStrategy(person)) {
             authenticationservice.setAuthenticated(true);

@@ -1,14 +1,10 @@
 package Booking;
 
-
-
 public class GermanBooking extends Booking
 {
     private Head head = new Head();
     private Body body = new Body();
     private Footer footer = new Footer();
-
-
 
     @Override
     public void setHead(Head head) 
