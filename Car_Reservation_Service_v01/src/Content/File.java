@@ -1,36 +1,25 @@
 package Content;
 
-import Booking.Booking;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class File extends Content {
-    private String contentDetails;
-    private Booking booking;
-    private PaymentReceipt paymentReceipt;
 
-    public File(String name, String contentDetails, String booking, String paymentReceipt) {
-        super(name);
-        this.contentDetails = contentDetails;
-        this.booking = booking;
-        this.paymentReceipt = paymentReceipt;
+    public File(ContentDetails contentDetails) {
+        super(contentDetails);
     }
 
-    @Override
-    public void displayContentDetails() {
-        System.out.println("File Name: " + this.name);
-        System.out.println("Content: " + this.contentDetails);
-    }
+	@Override
+	public void printStructure(String indent) {
+		System.out.println(indent + getName());
+	}
 
+	@Override
+	public String getName() {
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		return date.format(new Date(creationDate)) + ".java";
+	}
 
-//    public void operation() {
-//        String formatString;
-//        // Berechnen des Formatstrings fuer die Ausgabe von
-//        // Leerzeichen entsprechend der erreichten Ebene
-//        formatString = "%" + (level * 2) + "s";
-//        // Ausgabe der Leerzeichen
-//        System.out.printf(formatString, "");
-//        // Ausgabe eines Minuszeichens gefolgt vom Namen des Knotens
-//        System.out.println(" - " + super.getName());
-//    }
 //
 //    public Booking getBooking() {
 //        return booking;
