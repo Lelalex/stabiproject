@@ -23,4 +23,10 @@ public abstract class Person {
 	public void setID(int personID) {
 		
 	}
+
+	public abstract String getName();
+
+	public abstract Address getAddress();
+
+	public abstract String getMail();
 }
