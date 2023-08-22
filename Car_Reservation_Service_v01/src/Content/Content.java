@@ -1,15 +1,16 @@
 package Content;
 
 public abstract class Content {
-    protected String name;
+    protected ContentDetails contentDetails;
+    protected long creationDate;
 
-    public Content(String name) {
-        this.name = name;
+    public Content(ContentDetails contentDetails) {
+        this.contentDetails = contentDetails;
+        this.creationDate = System.currentTimeMillis();
     }
 
-    public String getName() {
-        return this.name;
-    }
+    public abstract void printStructure(String indent);
+    
+    public abstract String getName();
 
-    public abstract void displayContentDetails();
 }
