@@ -1,7 +1,10 @@
 package Payment;
 
 public enum PaymentType {
-	GoogleWallet,
-	Paypal,
-	MobileMoneyWallet;
+    PAYPAL,
+    GOOGLE_WALLET,
+    MOBILE_MONEY_WALLET;
+
+    // Weitere Methoden oder Felder, falls erforderlich
 }
+
