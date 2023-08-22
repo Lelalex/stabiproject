@@ -1,38 +1,43 @@
 package Booking;
 
 import Person.Person;
+import Ressource.Car;
 
 public abstract class BookingBuilder {
 	protected Person person;
-	protected CarConfiguration car;
+	protected Car car;
 	protected int duration;
 	protected String startDay;
 
+	public BookingBuilder(Person person, Car car, int duration, String startDay) 
+	{
+		this.person = person; 
+		this.car = car; 
+		this.duration = duration; 
+		this.startDay = startDay; 
+	}
+	
 	public BookingBuilder setPerson(Person person) {
 		this.person = person;
 		return this;
 	}
 	
-	public BookingBuilder setCar(CarConfiguration car) {
+	public BookingBuilder setCar(Car car) {
 		this.car = car;
+		return this;
 	}
 
 	public BookingBuilder setDuration(int duration) {
 		this.duration = duration;
+		return this;
 	}
 
 	public BookingBuilder setStartDay(String startDay) {
 		this.startDay = startDay;
+		return this;
 	}
 
 
-//    public BookingBuilder(Person person, CarConfiguration car, int duration, String startDay) 
-//    {
-//        this.person = person; 
-//        this.car = car; 
-//        this.duration = duration; 
-//        this.startDay = startDay; 
-//    }
 
 
 	protected abstract void buildHead();

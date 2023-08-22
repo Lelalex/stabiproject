@@ -1,10 +1,11 @@
 package Booking;
 
 import Person.Person;
+import Ressource.Car;
 
 public class GermanBookingBuilder extends BookingBuilder {
 
-	public GermanBookingBuilder(Person person, CarConfiguration car, int duration, String startDay) {
+	public GermanBookingBuilder(Person person, Car car, int duration, String startDay) {
 		super(person, car, duration, startDay);
 	}
 
@@ -24,7 +25,7 @@ public class GermanBookingBuilder extends BookingBuilder {
 	// GermanBody 
 	@Override
 	protected void buildBody() {
-		body.setBody(car, duration, startDay, car.getPricePerDay());
+		body.setBody(car, duration, startDay, car.getCost());
 		germanBooking.setBody(body);
 
 	}
@@ -32,7 +33,7 @@ public class GermanBookingBuilder extends BookingBuilder {
 	// GermanFooter
 	@Override
 	protected void buildFooter() {
-		price = duration * car.getPricePerDay();
+		price = duration * car.getCost();
 		footer.setFooter(price, "DE123456789");
 		germanBooking.setFooter(footer);
 

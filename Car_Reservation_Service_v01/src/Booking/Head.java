@@ -18,7 +18,7 @@ public class Head {
 	
 	public void printHead () {
 		System.out.println(this.name);
-		address.printAddress;
+		address.printAddress();
 		System.out.println(this.email);
 	}
 	

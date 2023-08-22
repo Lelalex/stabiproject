@@ -1,8 +1,10 @@
 package Booking;
 
+import Ressource.Car;
+
 public class Body {
 	
-	private CarConfiguration car;
+	private Car car;
 	private int duration;
 	private double price;
 	private String startDay;
@@ -11,11 +13,9 @@ public class Body {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setBody(CarConfiguration, int, String, double) {
+	public void setBody(Car car, int duration, String startDay, Double cost) {
 		// TODO addd CarConfig in Ressource
 		
 	}
 	
-	public 
-
 }

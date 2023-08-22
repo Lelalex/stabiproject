@@ -9,7 +9,7 @@ public class Footer {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setFooter (String, double) {
+	public void setFooter (double price, String string) {
 		
 	}
 	
