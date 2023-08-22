@@ -15,7 +15,7 @@ public class SetTopBoxDecorator extends Decorator {
 	
     @Override
     public String getDescription() {
-        return car.getDescription() + ", Set Topbox";
+        return car.getDescription() + " Extra: Set Topbox";
     }
 
     @Override

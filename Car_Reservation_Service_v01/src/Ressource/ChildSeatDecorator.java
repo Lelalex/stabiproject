@@ -2,7 +2,7 @@ package Ressource;
 
 public class ChildSeatDecorator extends Decorator {
 
-	private String size;
+//	private String size;
 
 	//explicit constructor
 	public ChildSeatDecorator(Ressource decorator) {
@@ -17,7 +17,7 @@ public class ChildSeatDecorator extends Decorator {
 	
     @Override
     public String getDescription() {
-        return car.getDescription() + ", Child Seat";
+        return car.getDescription() + " Extra: Child Seat";
     }
     
 	@Override
@@ -25,11 +25,11 @@ public class ChildSeatDecorator extends Decorator {
 		return car.getCost() + 10.0;
 	}
 	
-	public String getSize() {
-		size = "baby";
-		size = "big";
-		return size;
-	}
+//	public String getSize() {
+//		size = "baby";
+//		size = "big";
+//		return size;
+//	}
 
 //	private Ressource addChildSeat() {
 //		Ressource childSeat = null;
