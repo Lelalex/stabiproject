@@ -16,11 +16,6 @@ public class CurrencyAmount {
     public String getCurrency() {
         return currency;
     }
-    
-
-    
-    
-    
 
     // Setter, falls erforderlich
 }
