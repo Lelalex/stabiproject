@@ -10,3 +10,5 @@ public class MobileMoneyWalletPayment extends PaymentTemplate {
 						    + receiverAccount.getAccountName() + " using Mobile Money Wallet.");
     }
 }
+
+

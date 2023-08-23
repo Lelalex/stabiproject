@@ -17,3 +17,5 @@ public abstract class PaymentTemplate {
         System.out.println("Payment confirmation created.");
     }
 }
+
+//

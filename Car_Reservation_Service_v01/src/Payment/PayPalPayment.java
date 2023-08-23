@@ -10,3 +10,4 @@ public class PayPalPayment extends PaymentTemplate {
 						    + receiverAccount.getAccountName() + " using PayPal.");
     }
 }
+

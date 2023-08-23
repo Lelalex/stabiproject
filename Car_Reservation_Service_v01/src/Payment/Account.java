@@ -12,6 +12,9 @@ public class Account {
     public String getAccountName() {
         return accountName;
     }
+    
+    
+    
 
     // Weitere Getter und Setter, falls erforderlich
 }

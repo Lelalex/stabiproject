@@ -8,3 +8,5 @@ public enum PaymentType {
     // Weitere Methoden oder Felder, falls erforderlich
 }
 
+
+

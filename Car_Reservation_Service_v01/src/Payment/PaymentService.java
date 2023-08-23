@@ -21,3 +21,6 @@ public class PaymentService {
         payment.payAmount(senderAccount, receiverAccount, amount);
     }
 }
+
+
+

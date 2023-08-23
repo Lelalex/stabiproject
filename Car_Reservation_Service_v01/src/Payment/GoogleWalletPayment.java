@@ -10,3 +10,5 @@ public class GoogleWalletPayment extends PaymentTemplate {
 							    + receiverAccount.getAccountName() + " using Google Wallet.");
     }
 }
+
+
