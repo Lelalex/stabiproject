@@ -1,5 +1,8 @@
 package Booking;
 
+import Payment.PaymentType;
+import Statistics.StatisticsVisitor;
+
 public abstract class Booking {
 	
 //	private Body body;
@@ -28,4 +31,6 @@ public abstract class Booking {
 	public abstract Head getHead();
 	
 	public abstract double getPrice();
+	
+	public abstract void accept(StatisticsVisitor visitor, PaymentType paymentType, int bookingLanguage);
 }

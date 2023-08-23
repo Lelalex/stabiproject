@@ -1,5 +1,8 @@
 package Booking;
 
+import Payment.PaymentType;
+import Statistics.StatisticsVisitor;
+
 public class GermanBooking extends Booking
 {
     private Head head = new Head();
@@ -44,7 +47,12 @@ public class GermanBooking extends Booking
     public double getPrice() {
         return footer.getPrice();
     }
-    }
+
+	@Override
+	public void accept(StatisticsVisitor visitor, PaymentType paymentType, int bookingLanguage) {
+	    visitor.visit(this, paymentType, bookingLanguage);
+	}
+}
 
 //public class GermanBooking extends Booking {
 //    private String head;

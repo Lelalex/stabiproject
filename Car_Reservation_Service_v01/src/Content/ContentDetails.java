@@ -1,13 +1,14 @@
 package Content;
 
 import Booking.Booking;
+import Payment.PaymentService;
 
 public class ContentDetails {
 	
 	private Booking booking;
-	private Payment payment;
+	private PaymentService payment;
 	
-	public ContentDetails(Booking booking, Payment payment) {
+	public ContentDetails(Booking booking, PaymentService payment) {
 		this.booking = booking;
 		this.payment = payment;
 	}
@@ -16,7 +17,7 @@ public class ContentDetails {
 		return booking;
 	}
 	
-	public Payment getPayment() {
+	public PaymentService getPayment() {
 		return payment;
 	}
 
