@@ -7,4 +7,5 @@ module Car_Reservation_Service_v01 {
 	exports Person;
 
 	requires org.junit.jupiter.api;
+	requires junit;
 }

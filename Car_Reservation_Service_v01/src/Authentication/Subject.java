@@ -39,14 +39,8 @@ public abstract class Subject {
 
 	public int getCredentialType()
 	{
-		Scanner CredentialTypeScan = new Scanner(System.in);
-		System.out.println("Choose One of the listed Autehtication Choices" + "\n" 
-		+ "Username with Password: 1" + "\n" 
-		+ "Fingerprint: 2" + "\n" 
-		+ "Eyescanner: 3" + "\n" 
-		+ "Go back to MainMenu: 4");
-		int credential = CredentialTypeScan.nextInt();
+		int credentialType = 0;
 		
-		return credential;
+		return credentialType;
 	}
 }

@@ -1,5 +1,6 @@
 package Authentication;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,9 @@ class AuthenticationTest {
 	@Test
 	void canUserBeAuthenticated() 
 	{
-		authenticationService.authenticateSubject();
+		//		3 Tests?
+		Assert.assertTrue(authenticationService.isAuthenticated()); 
+		System.out.println("User was authenticated");
 	}
 
 }

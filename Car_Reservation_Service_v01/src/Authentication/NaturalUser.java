@@ -43,36 +43,45 @@ import Person.Person;
 import Database.DataBase;
 
 public class NaturalUser extends Subject {
-    
-    private DataBase DataBase; // Felddeklaration
-    private boolean authenticationPossible;
-    private AuthenticationService authenticationservice;
-    private PasswordStrategy password = new PasswordStrategy();
-    private FingerPrintStrategy fingerprint = new FingerPrintStrategy();
-    private EyeScanStrategy eyescan = new EyeScanStrategy();
 
-    public NaturalUser() {
-        DataBase = DataBase.getInstance(); // Initialisierung im Konstruktor
-    }
+	private DataBase DataBase; // Felddeklaration
+	private boolean authenticationPossible;
+	private AuthenticationService authenticationService;
+	private PasswordStrategy password = new PasswordStrategy();
+	private FingerPrintStrategy fingerprint = new FingerPrintStrategy();
+	private EyeScanStrategy eyescan = new EyeScanStrategy();
 
-    public boolean isAuthenticationPossible() {
-        return authenticationPossible;
-    }
+	public NaturalUser() {
+		DataBase = DataBase.getInstance(); // Initialisierung im Konstruktor
+	}
 
-    public void setAuthenticationPossible(boolean authenticationPossible) {
-        this.authenticationPossible = authenticationPossible;
-    }
+	public boolean isAuthenticationPossible() {
+		return authenticationPossible;
+	}
 
-    @Override
-    public void authenticateSubject() {
-        int id = this.getId();
-        checkID(id);
-        if (authenticationPossible) {
-            authenticationservice.setPerson(DataBase.getPerson(id));
-            chooseCredentialType(authenticationservice.getPerson());
-            DataBase.saveAuthentication(authenticationservice);
-        }
-    }
+	public void setAuthenticationPossible(boolean authenticationPossible) {
+		this.authenticationPossible = authenticationPossible;
+	}
+
+	@Override
+	public void authenticateSubject() {
+		int id = this.getId();
+		checkID(id);
+		if (authenticationPossible) {
+			Person person = DataBase.getPerson(id);
+			authenticationService.setPerson(person);
+			authenticationService.authenticateSubject();
+
+			if (authenticationService.isAuthenticated()) {
+				DataBase.saveAuthentication(authenticationService);
+			} else {
+				System.out.println("Authentication failed for this Natural User.");
+			}
+		} else {
+			System.out.println("Authentication is not possible for this ID.");
+		}
+	}
+
 	public void checkID(int id) {
 		// check Input PersonID via COnsole and check for not null
 		// set boolean true/false after check of Person ID
@@ -92,63 +101,4 @@ public class NaturalUser extends Subject {
 			return;
 		}
 	}
-
-	public int getCredentialType() {
-		Scanner CredentialTypeScan = new Scanner(System.in);
-		System.out.println("Choose One of the listed Authentication Choices" + "\n" + "Username with Password: 1" + "\n"
-				+ "Fingerprint: 2" + "\n" + "Eyescanner: 3" + "\n" + "Go back to MainMenu: 4");
-		int credentialType = CredentialTypeScan.nextInt();
-
-		return credentialType;
-	}
-
-	public void chooseCredentialType(Person person)
-	{
-		int credentialType = getCredentialType();
-
-		switch (credentialType) {
-
-		case 1:
-
-			if (password.runStrategy(person))
-			{
-				authenticationservice.setAuthenticated(true);
-			} else {
-				System.out.println("Username or password is wrong!");
-				chooseCredentialType(person);
-				return;
-			}
-			break;
-		case 2: {
-			if (fingerprint.runStrategy(person)) {
-				authenticationservice.setAuthenticated(true);
-			} else {
-				System.out.println("Invalid Fingerprint.");
-				chooseCredentialType(person);
-				return;
-			}
-			break;
-
-		}
-		case 3: {
-			if (eyescan.runStrategy(person)) {
-				authenticationservice.setAuthenticated(true);
-			} else {
-				System.out.println("Invalid Eyescan.");
-				chooseCredentialType(person);
-				return;
-			}
-			break;
-		}
-		case 4:
-			authenticationservice.setAuthenticated(false);
-			break;
-		default: {
-			System.out.println("Invalid input. Please choose again.");
-			this.authenticateSubject();
-		}
-		}
-
-	}
-
 }
