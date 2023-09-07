@@ -1,22 +1,24 @@
 package Person;
 
 public class Address {
+	   private String street;
+	   private int number;
+	   private int postcode;
+	   private String city;
+	   public Address(String street, int number, int postcode, String city) {
+	       this.street = street;
+	       this.number = number;
+	       this.postcode = postcode;
+	       this.city = city;
+	   }
+	   public void printAddress() {
+	       System.out.print(this.street);
+	       System.out.println(this.number);
+	       System.out.println(this.postcode);
+	       System.out.println(this.city);
+	   }
 
-    private String street;
-    private int number;
-    private int postcode; 
 
-    public Address(String street, int number, int postcode) {
-        this.street = street;
-        this.number = number;
-        this.postcode = postcode;
-    }
-
-    public void printAddress() {
-        System.out.print(this.street);
-        System.out.println(this.number);
-        System.out.println(this.postcode);
-    }
 
     public String getStreet() {
         return street;

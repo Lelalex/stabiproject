@@ -52,4 +52,43 @@ public class Folder extends Content {
 //        contents.remove(content);
 //    }
 
+	
+	public List<Content> getContents() {
+	    return contents;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

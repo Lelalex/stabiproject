@@ -1,14 +1,13 @@
 package Ressource;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
-class RessourceTest {
+public class RessourceTest {
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
-
+    @Test
+    public void testGetSelectedRessource() {
+        RessourceService service = new RessourceService();
+        service.getSelectedRessource();
+      
+    }
 }

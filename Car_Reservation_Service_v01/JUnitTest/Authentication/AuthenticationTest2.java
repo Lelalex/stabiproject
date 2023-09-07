@@ -8,6 +8,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Booking.Booking;
+import Content.ContentDetails;
+import Payment.PaymentService;
 import Person.Address;
 import Person.LegalPerson;
 import Person.NaturalPerson;
@@ -21,9 +24,11 @@ public class AuthenticationTest2 {
 	@BeforeEach
 	public void setUp() {
 		authService = new AuthenticationService();
+		
 		Address address = new Address("Hamburger Allee", 01, 12345);
 		naturalPerson = new NaturalPerson("Felix", "1", address, "23/04/1986");
 		legalPerson = new LegalPerson("Julia System", "2", address, "234569");
+		
 	}
 
 	@AfterEach
