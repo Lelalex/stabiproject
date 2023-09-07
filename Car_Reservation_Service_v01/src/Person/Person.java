@@ -42,5 +42,16 @@ public abstract class Person {
    public abstract String getName();
    public abstract Address getAddress();
    public abstract String getMail();
+   	public abstract Account getBankAccount();
+
+	public abstract void setBankAccount(Account account);
+
+	public abstract String getPassword();
+	
+	public abstract void setPassword(String password);
+
+	public abstract String getIban();
+	
+	public abstract void setIban(String Iban);
 }
 
