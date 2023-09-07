@@ -30,7 +30,7 @@ public class Account {
 
 	private static Account getSenderAccount (Person person) {
     		if(person.getBankAccount() == null)
-    		{person.setBankAccount(new Account(person.getName(), person.getMail(), person.getPassword(), person.getIban(), 100000));} 
+    		{person.setBankAccount(new Account(person.getName(), person.getMail(), 100000));} 
     		return person.getBankAccount(); 
     }
 
