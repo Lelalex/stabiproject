@@ -14,8 +14,6 @@ public abstract class PaymentTemplate {
     protected abstract void transferAmount(Account senderAccount, Account receiverAccount, CurrencyAmount amount);
 
     private void createConfirmation() {
-        System.out.println("Payment confirmation created.");
+        System.out.println("Payment is confirmed.");
     }
 }
-
-//
