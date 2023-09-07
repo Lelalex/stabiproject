@@ -23,14 +23,13 @@ public class NaturalPerson extends Person {
     
 
 	public NaturalPerson() {
-    	super(); // Ruft den parameterlosen Konstruktor der Elternklasse auf
+    	super(); 
     	Scanner scanner = new Scanner(System.in);
 
     	System.out.print("Please enter your date of birth: ");
     	this.dateOfBirth = scanner.nextLine();
    	 
-    	// Hier können Sie auch andere spezifische Details für NaturalPerson festlegen
-    	setSpecificDetails();
+     	setSpecificDetails();
 	}
 
     
