@@ -12,7 +12,7 @@ public class PaymentTest {
 	private String password;
 
 	@Test
-	public void testNaturalPersonInput() {
+	public void testPayment() {
 		System.out.print("Creating a payment...\n");
 		PaymentService paymentService = new PaymentService();
 		email = "werner@gmx.de";
