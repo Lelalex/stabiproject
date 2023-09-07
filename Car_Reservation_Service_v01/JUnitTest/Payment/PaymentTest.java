@@ -1,14 +1,26 @@
 package Payment;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
+public class PaymentTest {
 
-class PaymentTest {
+	private Account senderAccount ;
+	private Account receiverAccount;
+	private CurrencyAmount amount;
+	private String paymentMethod;
+	private String email;
+	private String password;
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	public void testNaturalPersonInput() {
+		System.out.print("Creating a payment...\n");
+		PaymentService paymentService = new PaymentService();
+		email = "werner@gmx.de";
+		password = "password123";
+		amount = new CurrencyAmount(12.34, "EUR");
+		senderAccount = new Account("Julian Werner", "werner@gmx.de", 100000);
+		receiverAccount = receiverAccount.getReceiverAccount();
+		paymentService.payAmount(senderAccount, receiverAccount, amount, paymentMethod, email, password);
 	}
 
 }
