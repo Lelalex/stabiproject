@@ -1,33 +1,34 @@
 package Authentication;
-
-import org.junit.Test;
-
-import Database.DataBase;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import Person.Address;
 import Person.NaturalPerson;
-import Person.Person;
-
 public class AuthenticationTest {
-    
-
-	public void initializeDatabase() {
-    	DataBase db = DataBase.getInstance();
-   	 
-    	Address address = new Address("Test Street", 1, 12345, "Test City");
-    	Person person = new NaturalPerson("Test Name", "123", address, "01-01-2000");
-    	//id test "2"
-    	db.addPerson(2, person);
-	}
-
-	@Test
-	public void testNaturalUserAuthentication() {
-    	System.out.print("Starting authentication for a natural user...\n");
-   	 
-    	initializeDatabase();  // Datenbank vor dem Start des Tests Initialisieren
-   	 
-    	NaturalUser naturalUser = new NaturalUser();
-    	naturalUser.authenticateSubject();
-	}
+   private AuthenticationService authenticationService;
+  
+  
+   @BeforeEach
+   public void setUp() {
+       authenticationService = new AuthenticationService();
+       // Hier können Sie alle notwendigen Initialisierungen für Ihren Service vornehmen
+   }
+   @Test
+   public void testAuthenticationWithValidCredentials() {
+       // Setzen Sie hier die Strategie und die zu authentifizierende Person
+       PasswordStrategy strategy = new PasswordStrategy(new PasswordStrategy.TestInputProvider("testUser"));
+      
+       Address address = new Address("Test Street", 123, 12345, "Test City");
+       NaturalPerson person = new NaturalPerson("Test Name", "Test ID", address, "01.01.2000"); // Erstellen Sie ein gültiges Person-Objekt
+       person.setUserName("testUser");
+       person.setPassword("testPassword");
+       authenticationService.setStrategy(strategy);
+       boolean isAuthenticated = authenticationService.authenticate(person);
+      
+       assertTrue(isAuthenticated, "The authentication should be successful with valid credentials");
+   }
 }
+
+
 
 

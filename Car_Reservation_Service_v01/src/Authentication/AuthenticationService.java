@@ -1,83 +1,91 @@
 package Authentication;
-
 import java.util.Scanner;
-
-import Person.LegalPerson;
-import Person.NaturalPerson;
 import Person.Person;
-
 public class AuthenticationService {
-
-    private boolean isAuthenticated;
-    private Person person;
-    private LoginStrategy fixedStrategy;
-
-    public Person getPerson() {
-   	 return person;
-    }
-
-    public void setPerson(Person person) {
-   	 this.person = person;
-    }
-    
-    //for Test Use
-    public void setFixedStrategy(LoginStrategy fixedStrategy) {
-    	this.fixedStrategy = fixedStrategy;
-	}
-
-    public void authenticateSubject() {
-   	 if (person == null) {
-   		 setAuthenticated(false);
-   		 return;
-   	 }
-
-   	 if (person instanceof NaturalPerson) {
-   		 LoginStrategy loginStrategy = (fixedStrategy != null) ? fixedStrategy : chooseLoginStrategy();
-   		 if (loginStrategy.runStrategy(person)) {
-   			 setAuthenticated(true);
-   		 } else {
-   			 setAuthenticated(false);
-   			 System.out.println("Authentication failed. Please try again!");
-   		 }
-   	 } else if (person instanceof LegalPerson) {
-   		 SoftwareSystem softwareSystem = new SoftwareSystem();
-   		 softwareSystem.executeCredentialType(person);
-   		 if (softwareSystem.isAuthenticated()) {
-   			 setAuthenticated(true);
-   		 } else {
-   			 setAuthenticated(false);
-   			 System.out.println("Authentication failed. Please try again!");
-   		 }
-   	 } else {
-   		 setAuthenticated(false);
-   		 System.out.println("Authentication failed: This person is unknown.");
-   	 }
-    }
-
-    private LoginStrategy chooseLoginStrategy() {
-   	 Scanner CredentialTypeScan = new Scanner(System.in);
-   	 System.out.println("Choose One of the listed Authentication Choices" + "\n" + "Username with Password: 1" + "\n"
-   			 + "Fingerprint: 2" + "\n" + "Eyescanner: 3" + "\n" + "Go back to MainMenu: 4");
-   	 int credentialType = CredentialTypeScan.nextInt();
-   	 switch (credentialType) {
-   	 case 1:
-   		 return new PasswordStrategy();
-   	 case 2:
-   		 return new FingerPrintStrategy();
-   	 case 3:
-   		 return new EyeScanStrategy();
-   	 default:
-   		 return new PasswordStrategy();
-   	 }
-    }
-
-    public void setAuthenticated(boolean isAuthenticated) {
-   	 this.isAuthenticated = isAuthenticated;
-    }
-
-    public boolean isAuthenticated() {
-   	 return isAuthenticated;
-    }
+   private LoginStrategy strategy;
+   private boolean isAuthenticated;
+   private boolean authenticated = false;
+   private Person person;
+  
+   public void setStrategy(LoginStrategy strategy) {
+       this.strategy = strategy;
+   }
+  
+   public void setPerson(Person person) {
+       this.person = person;
+   }
+  
+   public void authenticateSubject() {
+       if(strategy != null && person != null) {
+           authenticated = strategy.runStrategy(person);
+       } else {
+           // Hier könnten Sie einen Fehler ausgeben oder eine Exception werfen,
+           // weil keine Strategie oder Person gesetzt wurde
+       }
+   }
+   // Hier überprüfen Sie, ob die Authentifizierung erfolgreich war
+   public boolean isAuthenticated() {
+       return authenticated;
+   }
+  
+  
+   public boolean authenticate(Person person) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.print("Are you a natural or legal person? (n/l): ");
+       String type = scanner.nextLine();
+      
+       if ("n".equalsIgnoreCase(type)) {
+           System.out.println("1. Username with Password");
+           System.out.println("2. Fingerprint");
+           System.out.println("3. Eye scanner");
+           System.out.println("4. Go back to main menu");
+       } else if ("l".equalsIgnoreCase(type)) {
+           System.out.println("1. Username with Password");
+           System.out.println("2. Go back to main menu");
+       } else {
+           System.out.println("Invalid choice");
+           return false;
+       }
+       int choice = scanner.nextInt();
+       scanner.nextLine();  // Consume newline
+       switch (choice) {
+           case 1:
+           	strategy = new PasswordStrategy(new PasswordStrategy.ScannerInputProvider());
+               break;
+           case 2:
+               if ("n".equalsIgnoreCase(type)) {
+                   strategy = new FingerPrintStrategy();
+               } else {
+                   // Go back to the main menu
+                   return false;
+               }
+               break;
+           case 3:
+               if ("n".equalsIgnoreCase(type)) {
+                   strategy = new EyeScanStrategy();
+               } else {
+                   // Invalid choice
+                   System.out.println("Invalid choice");
+                   return false;
+               }
+               break;
+           case 4:
+               if ("n".equalsIgnoreCase(type)) {
+                   // Go back to the main menu
+                   return false;
+               }
+               break;
+           default:
+               System.out.println("Invalid choice");
+               return false;
+       }
+       if (strategy != null) {
+           return strategy.runStrategy(person);
+       }
+       return false;
+   }
 }
+
+
 
 

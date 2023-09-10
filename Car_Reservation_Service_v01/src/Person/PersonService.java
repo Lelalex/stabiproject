@@ -1,65 +1,97 @@
 package Person;
+
 import java.util.Scanner;
-//public class PersonService {
-//   public Person createPerson(String name, String id, String type, Address address) {
-//       if ("Natural".equalsIgnoreCase(type)) {
-//           return new NaturalPerson();
-//       } else if ("Legal".equalsIgnoreCase(type)) {
-//           return new LegalPerson();
-//       } else {
-//           throw new IllegalArgumentException("Invalid person type");
-//       }
-//   }
-//   public static Person createPerson() {
-//       Scanner scanner = new Scanner(System.in);
-//       System.out.print("Are you a natural or legal person? (n/l): ");
-//       String type = scanner.nextLine();
-//       if (type.equalsIgnoreCase("n")) {
-//           return new NaturalPerson();
-//       } else if (type.equalsIgnoreCase("l")) {
-//           return new LegalPerson();
-//       } else {
-//           System.out.println("Invalid input. Please enter 'n' for natural person or 'l' for legal person.");
-//           return createPerson();  // Recursive call to get a valid input
-//       }
-//   }
-//}
-//
+import Database.DataBase;
 
-public class PersonService {
-    private Scanner scanner;
+class PersonService {
+	public Person createPerson(String name, String type, Address address, String dateOfBirth, String companyName, String companyMail) {
+    	Person person;
+    	if ("Natural".equalsIgnoreCase(type)) {
+        	person = new NaturalPerson(name, null, address, dateOfBirth); // ID wird später gesetzt
+    	} else if ("Legal".equalsIgnoreCase(type)) {
+        	person = new LegalPerson(name, null, address, companyName, companyMail); // ID wird später gesetzt
+    	} else {
+        	throw new IllegalArgumentException("Invalid person type");
+    	}
 
-    public PersonService() {
-        this.scanner = new Scanner(System.in);
-    }
+    	DataBase.getInstance().savePerson(person); // Hier wird die ID gesetzt
 
-    public Person createPerson() {
-        System.out.print("Are you a natural or legal person? (n/l): ");
-        String type = scanner.nextLine();
+    	// Ausgabe der ID und des Benutzernamens nach der Registrierung
+    	System.out.println("Registration successful!");
+    	System.out.println("Username: " + name);
+    	System.out.println("ID: " + person.getID());
 
-        if (type.equalsIgnoreCase("n")) {
-            return new NaturalPerson();
-        } else if (type.equalsIgnoreCase("l")) {
-            return new LegalPerson();
-        } else {
-            System.out.println("Invalid input. Please enter 'n' for natural person or 'l' for legal person.");
-            return createPerson(); // Rekursiver Aufruf, um eine gültige Eingabe zu erhalten
-        }
-    }
+    	return person;
+	}
 
-    public static void main(String[] args) {
-        PersonService personService = new PersonService();
 
-        while (true) {
-            Person person = personService.createPerson();
-            person.displayInfo();
-
-            System.out.println("Successful! Do you want to create another person? (y/n): ");
-            String createAnother = personService.scanner.nextLine();
-            if (!createAnother.equalsIgnoreCase("y")) {
-                break;
-            
-            }
-        }
-    }
+	public static Person createPerson() {
+    	Scanner scanner = new Scanner(System.in);
+    	while (true) {
+        	System.out.print("Are you a natural or legal person? (n/l): ");
+        	String type = scanner.nextLine();
+        	if ("n".equalsIgnoreCase(type)) {
+            	System.out.print("Please enter your name: ");
+            	String name = scanner.nextLine();
+            	// ... (die restlichen Eingabeaufforderungen und die Erstellung der Adresse)
+            	System.out.print("Please enter your street: ");
+            	String street = scanner.nextLine();
+            	System.out.print("Please enter your house number: ");
+            	int number = scanner.nextInt();
+            	System.out.print("Please enter your postcode: ");
+            	int postcode = scanner.nextInt();
+            	scanner.nextLine(); // consume the remaining newline
+            	System.out.print("Please enter your city: ");
+            	String city = scanner.nextLine();
+            	System.out.print("Please enter your date of birth: ");
+            	String dateOfBirth = scanner.nextLine();
+           	 
+            	// Erstellen Sie die NaturalPerson Instanz mit einer temporären ID
+            	NaturalPerson person = new NaturalPerson(name, "TEMP_ID", new Address(street, number, postcode, city), dateOfBirth);
+           	 
+            	// Speichern Sie die Person in der Datenbank, wo die echte ID gesetzt wird
+            	DataBase.getInstance().savePerson(person);
+           	 
+            	// Geben Sie die Details der neuen Person aus
+            	System.out.println("Registration successful!");
+            	System.out.println("Username: " + name);
+            	System.out.println("ID: " + person.getID());
+           	 
+            	return person;
+        	}
+        	else if ("l".equalsIgnoreCase(type)) {
+            	System.out.print("Please enter the company name: ");
+            	String companyName = scanner.nextLine();
+            	System.out.print("Please enter the street: ");
+            	String street = scanner.nextLine();
+            	System.out.print("Please enter your house number: ");
+            	int number = scanner.nextInt();
+            	System.out.print("Please enter the postcode: ");
+            	int postcode = scanner.nextInt();
+            	scanner.nextLine(); // consume the remaining newline
+            	System.out.print("Please enter the city: ");
+            	String city = scanner.nextLine();
+            	System.out.print("Please enter the company mail: ");
+            	String companyMail = scanner.nextLine();
+           	 
+            	// Erstellen Sie die LegalPerson Instanz mit einer temporären ID
+            	LegalPerson person = new LegalPerson(companyName, "TEMP_ID", new Address(street, number, postcode, city), companyName, companyMail);
+           	 
+            	// Speichern Sie die Person in der Datenbank, wo die echte ID gesetzt wird
+            	DataBase.getInstance().savePerson(person);
+           	 
+            	// Geben Sie die Details der neuen Person aus
+            	System.out.println("Registration successful!");
+            	System.out.println("Username: " + companyName);
+            	System.out.println("ID: " + person.getID());
+           	 
+            	return person;
+        	}
+        	else {
+            	System.out.println("Invalid input. Please enter 'n' for natural person or 'l' for legal person.");
+        	}
+    	}
+	}
 }
+
+
