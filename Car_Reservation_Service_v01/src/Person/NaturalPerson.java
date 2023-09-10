@@ -26,14 +26,13 @@ public class NaturalPerson extends Person {
     	super(); 
     	Scanner scanner = new Scanner(System.in);
 
-    	System.out.print("Please enter your date of birth: ");
-    	this.dateOfBirth = scanner.nextLine();
+//    	System.out.print("Please enter your date of birth: ");
+//    	this.dateOfBirth = scanner.nextLine();
    	 
      	setSpecificDetails();
 	}
 
-    
-    
+   
 	private void setSpecificDetails() {
     	Scanner scanner = new Scanner(System.in);
     	System.out.print("Please enter your date of birth: ");

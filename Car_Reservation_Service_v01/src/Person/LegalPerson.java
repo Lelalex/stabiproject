@@ -6,7 +6,7 @@ import Booking.Booking;
 import Payment.Account;
 
 public class LegalPerson extends Person {
-	private String registrationNumber;
+	
     private String companyName;
 	private String companyMail;
 	private String userName;
@@ -23,10 +23,8 @@ public class LegalPerson extends Person {
     	super(); // Ruft den parameterlosen Konstruktor der Elternklasse auf
     	Scanner scanner = new Scanner(System.in);
 
-    	System.out.print("Please enter your registration number: ");
-    	this.registrationNumber = scanner.nextLine();
+    	
    	 
-    	// Hier können Sie auch andere spezifische Details für LegalPerson festlegen
     	setSpecificDetails();
 	}
     
@@ -34,8 +32,7 @@ public class LegalPerson extends Person {
     	Scanner scanner = new Scanner(System.in);
     	System.out.print("Please enter the company name: ");
     	this.name = scanner.nextLine();
-    	System.out.print("Please enter the registration number: ");
-    	this.registrationNumber = scanner.nextLine();
+    	
     	System.out.print("Please enter the company mail: ");
     	this.eMail = scanner.nextLine();
 	}
@@ -120,6 +117,6 @@ public class LegalPerson extends Person {
 	}
 	@Override
   public void displayInfo() {
-	System.out.println("Legal Person: " + name + ", ID: " + id + ", Address: " + address + ", Reg. No.: " + registrationNumber);
+	System.out.println("Legal Person: " + name + ", ID: " + id + ", Address: " + address);
  }
 }

@@ -1,47 +1,33 @@
 package Authentication;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import Database.DataBase;
-import Person.LegalPerson;
+import Person.Address;
 import Person.NaturalPerson;
+import Person.Person;
 
-class AuthenticationTest {
+public class AuthenticationTest {
+    
 
-	private AuthenticationService authenticationService; 
-	private NaturalPerson person = new NaturalPerson(); 
-	private LegalPerson legalPerson = new LegalPerson();
-	private DataBase db = DataBase.getEntry();
-	
-	@BeforeEach
-	void setUp() throws Exception {
-		authenticationService = new AuthenticationService();
-		person.setUserName("TestPerson");
-		person.setPassword("Test");
-		legalPerson.setUserName("TestCompany");
-		legalPerson.setPassword("Test");
-		db.savePerson(person); //id=1
-		db.savePerson(legalPerson); //id=2
-	}
-
-	@AfterEach
-	void tearDown() throws Exception 
-	{
-		person = null; 
-		legalPerson = null; 
-		db = null; 
-		authenticationService = null; 
+	public void initializeDatabase() {
+    	DataBase db = DataBase.getInstance();
+   	 
+    	Address address = new Address("Test Street", 1, 12345, "Test City");
+    	Person person = new NaturalPerson("Test Name", "123", address, "01-01-2000");
+    	//id test "2"
+    	db.addPerson(2, person);
 	}
 
 	@Test
-	void canUserBeAuthenticated() 
-	{
-		//		3 Tests?
-		Assert.assertTrue(authenticationService.isAuthenticated()); 
-		System.out.println("User was authenticated");
+	public void testNaturalUserAuthentication() {
+    	System.out.print("Starting authentication for a natural user...\n");
+   	 
+    	initializeDatabase();  // Datenbank vor dem Start des Tests Initialisieren
+   	 
+    	NaturalUser naturalUser = new NaturalUser();
+    	naturalUser.authenticateSubject();
 	}
-
 }
+
+
