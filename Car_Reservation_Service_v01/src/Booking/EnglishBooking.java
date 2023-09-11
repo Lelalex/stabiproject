@@ -39,13 +39,15 @@ public class EnglishBooking extends Booking {
 		return this.footer;
 	}
 
-	@Override
-	public double getPrice() {
-		return footer.getPrice();
-	}
 	
 	@Override
 	public void accept(StatisticsVisitor visitor, PaymentType paymentType, int bookingLanguage) {
 	    visitor.visit(this, paymentType, bookingLanguage);
+	}
+
+	@Override
+	public double getPrice() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
