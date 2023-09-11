@@ -1,86 +1,52 @@
 package Authentication;
 
 import java.util.Scanner;
+
+import Database.DataBase;
 import Person.Person;
 
+
+//also mit der datenbank soll aufjedenfall was gemacht werden, 
+//und der code ist noch lange vorm laufen laos meich bitte pur mit dem code weiter
+
 public class AuthenticationService {
-	private LoginStrategy strategy;
-	private boolean isAuthenticated;
-	private boolean authenticated = false;
-	private Person person;
+    private LoginStrategy strategy;
+    private boolean authenticated = false;
+    private Person person;
+    private DataBase dataBase = DataBase.getInstance();
+    
+    public void setStrategy(LoginStrategy strategy) {
+        this.strategy = strategy;
+    }
+    
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+    
+    public boolean authenticateSubject() {
+        if(strategy != null && person != null) {
+            authenticated = strategy.runStrategy(person);
+            return authenticated;
+        } else {
+            System.out.println("Strategy or person not set.");
+            return false;
+        }
+    }
 
-	public void setStrategy(LoginStrategy strategy) {
-		this.strategy = strategy;
-	}
 
-	public void setPerson(Person person) {
-		this.person = person;
-	}
+    // Hier überprüfen Sie, ob die Authentifizierung erfolgreich war
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
 
-	public void authenticateSubject() {
-		if (strategy != null && person != null) {
-			authenticated = strategy.runStrategy(person);
-		} else {
-		}
-	}
+    public boolean authenticate() {
+        if(strategy != null && person != null) {
+            authenticated = strategy.runStrategy(person);
+            return authenticated;
+        } else {
+            System.out.println("Strategy or person not set.");
+            return false;
+        }
+    }
 
-	// Check if Auth was successfull
-	public boolean isAuthenticated() {
-		return authenticated;
-	}
-
-	public boolean authenticate(Person person) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Are you a natural or legal person? (n/l): ");
-		String type = scanner.nextLine();
-
-		if ("n".equalsIgnoreCase(type)) {
-			System.out.println("1. Username with Password");
-			System.out.println("2. Fingerprint");
-			System.out.println("3. Eye scanner");
-			System.out.println("4. Go back to main menu");
-		} else if ("l".equalsIgnoreCase(type)) {
-			System.out.println("1. Username with Password");
-			System.out.println("2. Go back to main menu");
-		} else {
-			System.out.println("Invalid choice");
-			return false;
-		}
-		int choice = scanner.nextInt();
-		scanner.nextLine(); 
-		switch (choice) {
-		case 1:
-			strategy = new PasswordStrategy(new PasswordStrategy.ScannerInputProvider());
-			break;
-		case 2:
-			if ("n".equalsIgnoreCase(type)) {
-				strategy = new FingerPrintStrategy();
-			} else {
-				// Go back to the main menu
-				return false;
-			}
-			break;
-		case 3:
-			if ("n".equalsIgnoreCase(type)) {
-				strategy = new EyeScanStrategy();
-			} else {
-				System.out.println("Invalid choice");
-				return false;
-			}
-			break;
-		case 4:
-			if ("n".equalsIgnoreCase(type)) {
-				// Go back to the main menu
-				return false;
-			}
-			break;
-		default:
-			System.out.println("Invalid choice");
-			return false;
-		}
-		if (strategy != null) {
-			return strategy.runStrategy(person);
-		}
-		return false;
-	}
 }

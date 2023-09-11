@@ -23,9 +23,9 @@ public class EnglishBookingBuilder extends BookingBuilder {
 	protected void buildHead() {
 		String name = person.getName();
 		Address address = person.getAddress();
-		String email = person.getMail();
+		String email = person.geteMail();
 
-		head.setHead(person.getName(), person.getAddress(), person.getMail());
+		head.setHead(person.getName(), person.getAddress(), person.geteMail());
 
 		System.out.println("======================Your booking=======================");
 		System.out.println("Your contact details: " + name);

@@ -1,46 +1,27 @@
 package Authentication;
 
 import java.util.Scanner;
+
 import Person.Person;
 
 public class PasswordStrategy implements LoginStrategy {
-	private InputProvider inputProvider;
 
-	public PasswordStrategy(InputProvider inputProvider) {
-		this.inputProvider = inputProvider;
-	}
+    @Override
+    public boolean runStrategy(Person person) {
+        Scanner scanner = new Scanner(System.in);
 
-	@Override
-	public boolean runStrategy(Person person) {
-		System.out.println("Enter username");
-		String userName = inputProvider.getInput();
-		System.out.println("Enter password");
-		String password = inputProvider.getInput();
-		return userName.equals(person.getUserName()) && password.equals(person.getPassword());
-	}
+        System.out.println("Enter username:");
+        String username = scanner.nextLine();
 
-	public interface InputProvider {
-		String getInput();
-	}
+        System.out.println("Enter password:");
+        String password = scanner.nextLine();
 
-	public static class ScannerInputProvider implements InputProvider {
-		@Override
-		public String getInput() {
-			Scanner scanner = new Scanner(System.in);
-			return scanner.next();
-		}
-	}
+        System.out.println("Expected username: " + person.getUsername()); // Debug-Ausgabe
+        System.out.println("Expected password: " + person.getPassword()); // Debug-Ausgabe
 
-	public static class TestInputProvider implements InputProvider {
-		private String input;
+        return username.equals(person.getUsername()) && password.equals(person.getPassword());
+    
+    }
 
-		public TestInputProvider(String input) {
-			this.input = input;
-		}
-
-		@Override
-		public String getInput() {
-			return input;
-		}
-	}
 }
+

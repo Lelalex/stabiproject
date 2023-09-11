@@ -4,28 +4,46 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import Database.DataBase;
 import Person.Address;
+import Person.LegalPerson;
 import Person.NaturalPerson;
 
 public class AuthenticationTest {
-	private AuthenticationService authenticationService;
 
-	@BeforeEach
-	public void setUp() {
-		authenticationService = new AuthenticationService();
-	}
+    private AuthenticationService authenticationService;
+    private DataBase dataBase;
 
-	@Test
-	public void testAuthenticationWithValidCredentials() {
-		PasswordStrategy strategy = new PasswordStrategy(new PasswordStrategy.TestInputProvider("testUser"));
+    @BeforeEach
+    public void setUp() {
+        authenticationService = new AuthenticationService();
+        dataBase = DataBase.getInstance();
+        
+        // Hinzufügen von Testdaten für NaturalPerson
+        Address address = new Address("Test Street", 123, 12345, "Test City");
+        NaturalPerson naturalPerson = new NaturalPerson("Test Name", "user1", "user2", "1", address, "01.01.2000");
+        dataBase.addTestData(naturalPerson);
+        
+        // Hinzufügen von Testdaten für LegalPerson (angenommen, dass Sie eine ähnliche Konstruktor für LegalPerson haben)
+        LegalPerson legalPerson = new LegalPerson("compuser", "campname", "comppass", "1", address, "gmbh", "mail");
 
-		Address address = new Address("Test Street", 123, 12345, "Test City");
-		NaturalPerson person = new NaturalPerson("Test Name", "Test ID", address, "01.01.2000"); 
-		person.setUserName("testUser");
-		person.setPassword("testPassword");
-		authenticationService.setStrategy(strategy);
-		boolean isAuthenticated = authenticationService.authenticate(person);
+        dataBase.addTestData(legalPerson);
+    
+        dataBase.printPersonDetails("1");
+        
+    }
 
-		assertTrue(isAuthenticated, "The authentication should be successful with valid credentials");
-	}
+    @Test
+    public void testAuthenticationWithValidCredentials() {
+        // Erstellen eines NaturalUser-Objekts
+        NaturalUser naturalUser = new NaturalUser();
+        
+        // Rufen Sie die authenticate Methode auf dem NaturalUser-Objekt auf, um den Authentifizierungsprozess zu starten
+        boolean isAuthenticated = naturalUser.authenticate();
+
+        // Überprüfen Sie, ob die Authentifizierung erfolgreich war
+        assertTrue(isAuthenticated, "The authentication should be successful with valid credentials");
+    }
+
 }

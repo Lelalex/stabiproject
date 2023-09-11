@@ -15,13 +15,16 @@ public class NaturalPerson extends Person {
 	private String iban;
 	private double balance;
 	private Address address;
-	private int ID;
+	private String ID;
 	private Booking booking;
 	private Account bankAccount;
 
-	public NaturalPerson(String name, String id, Address address, String dateOfBirth) {
-		super(name, id, address);
+	public NaturalPerson(String name, String username, String password, String id, Address address, String dateOfBirth) {
+		super(name, username, password, id, address);
 		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.ID = id;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 	}
@@ -34,28 +37,12 @@ public class NaturalPerson extends Person {
 		this.name = name;
 	}
 
-	public Address getAddress() {
-		return address;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public String getMail() {
-		return eMail;
-	}
-
-	public void setMail(String eMail) {
-		this.eMail = eMail;
-	}
-
-	public String getUserName() {
-		return username;
-	}
-
-	public void setUserName(String user) {
-		this.username = user;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -66,36 +53,28 @@ public class NaturalPerson extends Person {
 		this.password = password;
 	}
 
-//	public String getID() {
-//		return ID;
-//	}
-//
-	public void setID(int iD) {
-		ID = iD;
+	public String getId() {
+		return id;
 	}
 
-	public String getIban() {
-		return iban;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public void setIban(String iban) {
-		this.iban = iban;
+	public Address getAddress() {
+		return address;
 	}
 
-	public double getBalance() {
-		return balance;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
-//	public void setBalance(double balance) {
-//    	this.balance = balance;
-//	}
-
-	public Booking getBooking() {
-		return booking;
+	public String geteMail() {
+		return eMail;
 	}
 
-	public void setBooking(Booking booking) {
-		this.booking = booking;
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
 	}
 
 	public Account getBankAccount() {
@@ -105,6 +84,15 @@ public class NaturalPerson extends Person {
 	public void setBankAccount(Account bankAccount) {
 		this.bankAccount = bankAccount;
 	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	
 
 	@Override
 	public void displayInfo() {

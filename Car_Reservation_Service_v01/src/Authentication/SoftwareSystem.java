@@ -1,48 +1,66 @@
 package Authentication;
 
 import java.util.Scanner;
-import Authentication.PasswordStrategy.ScannerInputProvider;
+
+import Database.DataBase;
 import Person.Person;
 
-public class SoftwareSystem {
-	private boolean isAuthenticated;
-	private AuthenticationService authenticationService;
+public class SoftwareSystem extends Subject {
 
-	public SoftwareSystem() {
-		this.authenticationService = new AuthenticationService();
-	}
+    private AuthenticationService authenticationService;
 
-	public void executeCredentialType(Person person) {
-	       Scanner scanner = new Scanner(System.in);
-	       while (true) {
-	           System.out.println("Choose an option:");
-	           System.out.println("1. Username with Password");
-	           System.out.println("2. Go back to main menu");
-	           int choice = scanner.nextInt();
-	           scanner.nextLine(); // Consume the newline character
-	           switch (choice) {
-	               case 1:
-	               	authenticationService.setStrategy(new PasswordStrategy(new ScannerInputProvider()));
-	                   authenticationService.setPerson(person);
-	                   authenticationService.authenticateSubject();
-	                   break;
-	               case 2:
-	                   return; // Back to main menu
-	               default:
-	                   System.out.println("Invalid choice. Please try again.");
-	                   continue;
-	           }
-	           if (authenticationService.isAuthenticated()) {
-	               System.out.println("Authentication successful.");
-	               isAuthenticated = true;
-	               return;
-	           } else {
-	               System.out.println("Authentication failed. Please try again.");
-	           }
-	       }
-	   }
-	
-	public boolean isAuthenticated() {
-	       return isAuthenticated;
-	   }
+    public SoftwareSystem() {
+        this.dataBase = DataBase.getInstance();
+        this.authenticationService = new AuthenticationService();
+    }
+
+    @Override
+    public boolean authenticateSubject() {
+        if (person == null) {
+            System.out.println("Authentication is not possible for this ID.");
+            return false;
+        }
+
+        // Setzen Sie die Person für den AuthenticationService
+        authenticationService.setPerson(person);
+
+        // Führen Sie die Authentifizierungsstrategie aus
+        executeCredentialType(person);
+        
+        return authenticationService.isAuthenticated();
+    }
+
+    public boolean executeCredentialType(Person person) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Choose an authentication method:");
+            System.out.println("1. Username with Password");
+
+            System.out.println("2. Go back to main menu");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    authenticationService.setStrategy(new PasswordStrategy());
+                    break;
+            
+                case 2:
+                    return false; // Back to main menu
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    continue;
+            }
+
+            authenticationService.authenticateSubject();
+            if (authenticationService.isAuthenticated()) {
+                return true;
+            } else {
+                System.out.println("Authentication failed. Please try again.");
+            }
+        }
+    }
+
 }

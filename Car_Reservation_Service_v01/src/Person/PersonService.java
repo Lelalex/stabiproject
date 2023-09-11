@@ -4,87 +4,91 @@ import java.util.Scanner;
 import Database.DataBase;
 
 public class PersonService {
-	public Person createPerson(String name, String type, Address address, String dateOfBirth, String companyName,
-			String companyMail) {
+	public Person createPerson(String name, String username, String password, String type, Address address, String dateOfBirth, String companyName, String companyMail) {
 		Person person;
 		if ("Natural".equalsIgnoreCase(type)) {
-			person = new NaturalPerson(name, null, address, dateOfBirth);
+		    person = new NaturalPerson(name, username, password, null, address, dateOfBirth); // ID is set in the next line
+		    DataBase.getInstance().savePerson((NaturalPerson) person); 
 		} else if ("Legal".equalsIgnoreCase(type)) {
-			person = new LegalPerson(name, null, address, companyName, companyMail);
+		    person = new LegalPerson(name, username, password, null, address, companyName, companyMail); 
+		    DataBase.getInstance().savePerson((LegalPerson) person); 
 		} else {
-			throw new IllegalArgumentException("Invalid person type");
+		    throw new IllegalArgumentException("Invalid person type");
 		}
 
-		DataBase.getInstance().savePerson(person);
-
-		// Ausgabe der ID und des Benutzernamens nach der Registrierung
+		// Printout ID and Username after registration
 		System.out.println("Registration successful!");
-		System.out.println("Username: " + name);
-		System.out.println("ID: " + person.getID());
+		System.out.println("Username: " + username);
+		System.out.println("ID: " + person.getId());
+
 		return person;
 	}
 
-	public static Person createPerson() {
-		Scanner scanner = new Scanner(System.in);
-		while (true) {
-			System.out.print("Are you using our system as a natural user or legal user? \n");
-			System.out.println("Please press (n) for natural user or (l) for legal user.");
-			String type = scanner.nextLine();
-			if ("n".equalsIgnoreCase(type)) {
-				System.out.print("Please enter your name: ");
-				String name = scanner.nextLine();
-				System.out.print("Please enter your street: ");
-				String street = scanner.nextLine();
-				System.out.print("Please enter your house number: ");
-				int number = scanner.nextInt();
-				System.out.print("Please enter your postcode: ");
-				int postcode = scanner.nextInt();
-				scanner.nextLine();
-				System.out.print("Please enter your city: ");
-				String city = scanner.nextLine();
-				System.out.print("Please enter your date of birth: ");
-				String dateOfBirth = scanner.nextLine();
 
-				// create NaturalPerson with TempID
-				NaturalPerson person = new NaturalPerson(name, "TEMP_ID", new Address(street, number, postcode, city),
-						dateOfBirth);
 
-				// save person to DB, where real ID is set
-				DataBase.getInstance().savePerson(person);
+    public static Person createPerson() {
+    	Scanner scanner = new Scanner(System.in);
+        while (true) {
+        	System.out.print("Are you a natural or legal person? (n/l): ");
+            String type = scanner.nextLine();
 
-				System.out.println("Registration successful!");
-				System.out.println("Username: " + name);
-				System.out.println("ID: " + person.getID());
+            if ("n".equalsIgnoreCase(type) || "l".equalsIgnoreCase(type)) {
+                System.out.print("Please enter your name: ");
+                String name = scanner.nextLine();
+                System.out.print("Please enter your username: ");
+                String username = scanner.nextLine();
+                System.out.print("Please enter your password: ");
+                String password = scanner.nextLine();
+                System.out.print("Please enter your street: ");
+                String street = scanner.nextLine();
+                System.out.print("Please enter your house number: ");
+                int number = scanner.nextInt();
+                System.out.print("Please enter your postcode: ");
+                int postcode = scanner.nextInt();
+                scanner.nextLine(); // consume the remaining newline
+                System.out.print("Please enter your city: ");
+                String city = scanner.nextLine();
 
-				return person;
-			} else if ("l".equalsIgnoreCase(type)) {
-				System.out.print("Please enter the company name: ");
-				String companyName = scanner.nextLine();
-				System.out.print("Please enter the street: ");
-				String street = scanner.nextLine();
-				System.out.print("Please enter your house number: ");
-				int number = scanner.nextInt();
-				System.out.print("Please enter the postcode: ");
-				int postcode = scanner.nextInt();
-				scanner.nextLine();
-				System.out.print("Please enter the city: ");
-				String city = scanner.nextLine();
-				System.out.print("Please enter the company mail: ");
-				String companyMail = scanner.nextLine();
+            Address address = new Address(street, number, postcode, city);
 
-				LegalPerson person = new LegalPerson(companyName, "TEMP_ID",
-						new Address(street, number, postcode, city), companyName, companyMail);
+            if ("n".equalsIgnoreCase(type)) {
+                System.out.print("Please enter your date of birth: ");
+                String dateOfBirth = scanner.nextLine();
+                
+                NaturalPerson person = new NaturalPerson(name, username, password, null, address, dateOfBirth);
+                
+                DataBase.getInstance().savePerson(person);
+                
+                System.out.println("Registration successful!");
+                System.out.println("Username: " + username);
+                System.out.println("ID: " + person.getId());
+                
+                return person;
+            } 
+            else if ("l".equalsIgnoreCase(type)) {
+                System.out.print("Please enter the company name: ");
+                String companyName = scanner.nextLine();
+                System.out.print("Please enter the company mail: ");
+                String companyMail = scanner.nextLine();
+                
+                LegalPerson person = new LegalPerson(name, username, password, null, address, companyName, companyMail);
+                
+                DataBase.getInstance().savePerson(person);
+                
+                System.out.println("Registration successful!");
+                System.out.println("Username: " + username);
+                System.out.println("ID: " + person.getId());
+                
+                return person;
+            }
+            else {
+                System.out.println("Invalid input. Please enter 'n' for natural person or 'l' for legal person.");
+            }
+            }
+            else {
+                System.out.println("Invalid input. Please enter 'n' for natural person or 'l' for legal person.");
+            }
+            
+        
+        }}}
 
-				DataBase.getInstance().savePerson(person);
-
-				System.out.println("Registration successful!");
-				System.out.println("Username: " + companyName);
-				System.out.println("ID: " + person.getID());
-
-				return person;
-			} else {
-				System.out.println("Invalid input. Please enter 'n' for natural person or 'l' for legal person.");
-			}
-		}
-	}
-}

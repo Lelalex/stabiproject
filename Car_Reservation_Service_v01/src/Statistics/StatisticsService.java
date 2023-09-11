@@ -121,7 +121,7 @@ public class StatisticsService {
         } else if (paymentType == PaymentType.MOBILE_MONEY_WALLET) {
             return visitor.getEnglishBookingsPaidByMobileMoneyWallet();
         } else {
-            return 0; d
+            return 0; 
         }
     }
  

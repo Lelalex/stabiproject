@@ -49,6 +49,8 @@ public class ContentTest {
     public void testAddContentToFolder() {
 
         ContentDetails contentDetails = new ContentDetails(null, null);
+        // Booking = new Booking, Payment = new Payment -> Methode im Pckg einfügen
+        // Test der Methode addContent aus Contentservice
         Folder folder = new Folder(contentDetails);
         File file = new File(contentDetails);
         folder.addContent(file);

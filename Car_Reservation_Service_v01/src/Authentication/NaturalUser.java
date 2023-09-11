@@ -1,66 +1,73 @@
 package Authentication;
 
 import java.util.Scanner;
+
 import Database.DataBase;
 import Person.Person;
 
 public class NaturalUser extends Subject {
-	private DataBase dataBase;
-	private boolean authenticationPossible;
-	private AuthenticationService authenticationService;
 
-	public NaturalUser() {
-		this.dataBase = DataBase.getInstance();
-		this.authenticationService = new AuthenticationService();
-	}
+    private AuthenticationService authenticationService;
 
-	public boolean isAuthenticationPossible() {
-		return authenticationPossible;
-	}
+    public NaturalUser() {
+        this.dataBase = DataBase.getInstance();
+        this.authenticationService = new AuthenticationService();
+    }
 
-	public void setAuthenticationPossible(boolean authenticationPossible) {
-		this.authenticationPossible = authenticationPossible;
-	}
+    @Override
+    public boolean authenticateSubject() {
+        if (person == null) {
+            System.out.println("Authentication is not possible for this ID.");
+            return false;
+        }
 
-	@Override
-	public boolean authenticateSubject() {
-		String id = getIdFromUser(); 
-		if (checkID(id)) {
-			Person person = dataBase.getPerson(id); 
-			authenticationService.setPerson(person);
-			authenticationService.authenticateSubject();
-			if (authenticationService.isAuthenticated()) {
-				dataBase.saveAuthentication(authenticationService);
-				System.out.println("Authentication successful.");
-				return true;
-			} else {
-				System.out.println("Authentication failed for this Natural User.");
-				return false;
-			}
-		} else {
-			System.out.println("Authentication is not possible for this ID.");
-			return false;
-		}
-	}
+        // Setzen Sie die Person für den AuthenticationService
+        authenticationService.setPerson(person);
 
-	private String getIdFromUser() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Please enter your ID: ");
-		return scanner.nextLine();
-	}
+        // Führen Sie die Authentifizierungsstrategie aus
+        executeCredentialType(person);
+        
+        return authenticationService.isAuthenticated();
+    }
 
-	public boolean checkID(String id) {
-       Person personFromDB = dataBase.getPerson(id);  
-       if (personFromDB != null) {
-           authenticationPossible = true;
-       } else {
-           System.out.println("Authentication failed for this Natural User.");
-           if (this.retry()) {
-               this.authenticate();
-           } else {
-               authenticationPossible = false;
-           }
-       }
-       return authenticationPossible;  
-   }
+    public boolean executeCredentialType(Person person) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Choose an authentication method:");
+            System.out.println("1. Username with Password");
+            System.out.println("2. Eye Scan");
+            System.out.println("3. Finger Print");
+            System.out.println("4. Go back to main menu");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    authenticationService.setStrategy(new PasswordStrategy());
+                    break;
+                case 2:
+                    authenticationService.setStrategy(new EyeScanStrategy());
+                    break;
+                case 3:
+                    authenticationService.setStrategy(new FingerPrintStrategy());
+                    break;
+                case 4:
+                    return false; // Back to main menu
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    continue;
+            }
+
+            authenticationService.authenticateSubject();
+            if (authenticationService.isAuthenticated()) {
+                
+                return true;
+            } else {
+                System.out.println("Authentication failed. Please try again.");
+            }
+        }
+    }
+
 }

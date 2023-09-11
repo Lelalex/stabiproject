@@ -6,7 +6,6 @@ import Booking.Booking;
 import Payment.Account;
 
 public class LegalPerson extends Person {
-//    private String registrationNumber;
 	private String companyName;
     private String companyMail;
     private String userName;
@@ -18,8 +17,8 @@ public class LegalPerson extends Person {
     private Account bankAccount;
 
 
-    public LegalPerson(String name, String id, Address address, String companyName, String companyMail) {
-    	super(name, id, address);
+    public LegalPerson(String name, String username, String password, String id, Address address, String companyName, String companyMail) {
+    	super(name, username, password, id, address);
     	this.name = name;
     	this.companyName = companyName;
     	this.companyMail = companyMail;
@@ -35,86 +34,70 @@ public class LegalPerson extends Person {
     	return scanner.nextLine();
 	}
 
-
-
+    
     public String getName() {
-   	 return companyName;
-    }
+		return name;
+	}
 
-    public void setName(String name) {
-   	 this.companyName = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getUserName() {
-   	 return userName;
-    }
+	public String getUsername() {
+		return this.username;
+	}
 
-    public void setUserName(String userName) {
-   	 this.userName = userName;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
-   	 return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-   	 this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public Address getAddress() {
-   	 return address;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setAddress(Address address) {
-   	 this.address = address;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getMail() {
-   	 return companyMail;
-    }
+	public Address getAddress() {
+		return address;
+	}
 
-    public void setMail(String mail) {
-   	 this.companyMail = mail;
-    }
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
-//    public int getID() {
-//   	 return ID;
-//    }
+	public String geteMail() {
+		return eMail;
+	}
 
-    public void setID(int id) {
-   	 this.ID = id;
-    }
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
 
-    public String getIban() {
-   	 return iban;
-    }
+	public Account getBankAccount() {
+		return bankAccount;
+	}
 
-    public void setIban(String iban) {
-   	 this.iban = iban;
-    }
+	public void setBankAccount(Account bankAccount) {
+		this.bankAccount = bankAccount;
+	}
 
-    public double getBalance() {
-   	 return balance;
-    }
+	public double getBalance() {
+		return balance;
+	}
 
-    public void setBalance(double balance) {
-   	 this.balance = balance;
-    }
-
-    public Booking getBooking() {
-   	 return booking;
-    }
-
-    public void setBooking(Booking booking) {
-   	 this.booking = booking;
-    }
-
-    public Account getBankAccount() {
-   	 return bankAccount;
-    }
-
-    public void setBankAccount(Account bankAccount) {
-   	 this.bankAccount = bankAccount;
+	public void setBalance(double balance) {
+		this.balance = balance;
+	
     }
     @Override
   public void displayInfo() {
