@@ -45,9 +45,9 @@ public class GermanBooking extends Booking
 
     @Override
     public double getPrice() {
-        return footer.getPrice();
+        return 0;
     }
-
+    
 	@Override
 	public void accept(StatisticsVisitor visitor, PaymentType paymentType, int bookingLanguage) {
 	    visitor.visit(this, paymentType, bookingLanguage);
