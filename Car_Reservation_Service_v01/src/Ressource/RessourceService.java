@@ -1,5 +1,8 @@
 package Ressource;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class RessourceService {
@@ -18,9 +21,11 @@ public class RessourceService {
     }
 
 
-    private Ressource chooseCarType() {
+
+
+	private Ressource chooseCarType() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Car Choice");
+        System.out.println("Choose your car: ");
         System.out.println("1. VW Bus");
         System.out.println("2. Smart");
         System.out.println("3. Suv");
@@ -41,6 +46,23 @@ public class RessourceService {
                 System.out.println("Invalid choice. Please try again.");
                 car = chooseCarType();
         }
+        System.out.println("How long do you want to rent this car? Please enter number of days.");
+        int duration = scanner.nextInt();
+        car.setDuration(duration);
+        System.out.println("When do you want to rent your car? Please use format YYYY-MM-DD.");
+        String startDayString = scanner.next();
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDay;
+        try {
+            startDay = dateFormat.parse(startDayString);
+        } catch (ParseException e) {
+            System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+            return chooseCarType();
+        }
+        // Set the start date in car
+        car.setStartDay(startDay);
+        
         return car;
     }
 
@@ -82,7 +104,6 @@ public class RessourceService {
         }
         return car;
     }
-
 }
 
 
