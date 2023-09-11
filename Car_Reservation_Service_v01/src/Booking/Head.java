@@ -39,13 +39,15 @@ public class Head {
     private String name;
     private Address address;
     private String email;
+    private String language;
     
     public Head() {
         
     }
     
     public void printHead() {
-        System.out.println("Name: " + name);
+        System.out.println("Language: " + language);
+    	System.out.println("Name: " + name);
         System.out.println("Address: ");
         address.printAddress();
         System.out.println("Email: " + email);
@@ -55,6 +57,7 @@ public class Head {
         this.name = name;
         this.address = address;
         this.email = email;
+        this.language = language;
     }
     
     public String getName() {
@@ -67,6 +70,10 @@ public class Head {
     
     public String getEmail() {
         return email;
+    }
+    
+    public String getLanguage() {
+        return language;
     }
 }
 
