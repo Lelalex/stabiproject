@@ -1,5 +1,7 @@
 package Ressource;
 
+import java.util.Date;
+
 public interface Ressource {
 	
 	/*
@@ -16,5 +18,13 @@ public interface Ressource {
 	String getBrand();
 	String getLicense();
 	String getDescription();
+	
+	public int getDuration();
+	public void setDuration(int duration);
+
+	public Double getTotalPrice();
+
+	public Date getStartDay();
+	public void setStartDay(Date startDay);
 		
 }
