@@ -1,21 +1,20 @@
 package Ressource;
 
+import java.util.Date;
+
 public class SetTopBoxDecorator extends Decorator {
 	
+	private int duration;
+	
 	//explicit constructor
-	public SetTopBoxDecorator(Ressource decorator) {
-		super(decorator);
+	public SetTopBoxDecorator(Ressource car) {
+		super(car);
 		// TODO Auto-generated constructor stub
-	}
-
-	public int addRessource() {
-		ressourcecount++;
-		return ressourcecount;
 	}
 	
     @Override
     public String getDescription() {
-        return car.getDescription() + " Extra: Set Topbox";
+        return car.getDescription() + ", Extra: Set Topbox";
     }
 
     @Override
@@ -23,9 +22,33 @@ public class SetTopBoxDecorator extends Decorator {
         return car.getCost() + 10.0;
     }
 
-//	private Ressource addSetTopBox() {
-//		Ressource SetTopBox = null;
-//		// TODO Auto-generated method stub
-//		return SetTopBox;
-//	}
+	@Override
+	public int getDuration() {
+		// TODO Auto-generated method stub
+		duration = car.getDuration();
+		return duration;
+	}
+
+	@Override
+	public void setDuration(int duration) {
+		this.duration = duration;
+		
+	}
+
+	@Override
+	public Double getTotalPrice() {
+		// TODO Auto-generated method stub
+		return car.getCost() * duration + 10.0 * duration;
+	}
+
+	@Override
+	public Date getStartDay() {
+		return car.getStartDay();
+	}
+
+	@Override
+	public void setStartDay(Date startDay) {
+		car.setStartDay(startDay);		
+	}
 }
+
