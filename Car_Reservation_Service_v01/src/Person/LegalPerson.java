@@ -13,16 +13,17 @@ public class LegalPerson extends Person {
     private String password;
     private String iban;
     private double balance;
-    private Address companyAddress;
     private int ID;
     private Booking booking;
     private Account bankAccount;
 
-    
+
     public LegalPerson(String name, String id, Address address, String companyName, String companyMail) {
     	super(name, id, address);
+    	this.name = name;
     	this.companyName = companyName;
     	this.companyMail = companyMail;
+    	this.address = address;
     }
 
 
@@ -34,36 +35,8 @@ public class LegalPerson extends Person {
     	return scanner.nextLine();
 	}
 
-//	public void setID(String personID) {
-//    	this.id = personID;
-//	}
 
-//	private static Address collectAddress() {
-//    	Scanner scanner = new Scanner(System.in);
-//    	System.out.println("-- Enter Adress details -- ");
-//    	System.out.print("Please enter the street: ");
-//    	String street = scanner.nextLine();
-//    	System.out.print("Please enter the house number: ");
-//    	int number = scanner.nextInt();
-//    	System.out.print("Please enter the postcode: ");
-//    	int postcode = scanner.nextInt();
-//    	scanner.nextLine(); // consume the remaining newline
-//    	System.out.print("Please enter the city: ");
-//    	String city = scanner.nextLine();
-//    	return new Address(street, number, postcode, city);
-//	}
-//
-//	private void setSpecificDetails() {
-//    	Scanner scanner = new Scanner(System.in);
-//    	System.out.print("Please enter the company name: ");
-//    	this.companyName = scanner.nextLine();
-//    	// System.out.print("Please enter the registration number: ");
-//    	// this.registrationNumber = scanner.nextLine();
-//    	System.out.print("Please enter the company mail: ");
-//    	this.companyMail = scanner.nextLine();
-//	}
-    
-    
+
     public String getName() {
    	 return companyName;
     }
@@ -89,11 +62,11 @@ public class LegalPerson extends Person {
     }
 
     public Address getAddress() {
-   	 return companyAddress;
+   	 return address;
     }
 
     public void setAddress(Address address) {
-   	 this.companyAddress = address;
+   	 this.address = address;
     }
 
     public String getMail() {
@@ -146,9 +119,7 @@ public class LegalPerson extends Person {
     @Override
   public void displayInfo() {
    	 System.out.println("Legal Person: " + name +  ", Address: " + address);
-   	 
+
 //   	 System.out.println("Legal Person: " + name + ", ID: " + id + ", Address: " + address + ", Reg. No.: " + registrationNumber);
  }
 }
-
-
