@@ -68,7 +68,6 @@ public class EnglishBookingBuilder extends BookingBuilder {
 		buildHead();
 		buildBody();
 		buildFooter();
-		englishBooking.accept(visitor, PaymentType.PAYPAL, 2);
 		return englishBooking;
 	}
 

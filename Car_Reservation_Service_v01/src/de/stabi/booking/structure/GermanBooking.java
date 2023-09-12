@@ -44,8 +44,8 @@ public class GermanBooking extends Booking {
 //        return 0;
 //    }
 
-	@Override
-	public void accept(Visitor visitor, PaymentType paymentType, int bookingLanguage) {
-		visitor.visit(this, paymentType, bookingLanguage);
-	}
+//	@Override
+//	public void accept(Visitor visitor, PaymentType paymentType, int bookingLanguage) {
+//		visitor.visit(this, paymentType, bookingLanguage);
+//	}
 }

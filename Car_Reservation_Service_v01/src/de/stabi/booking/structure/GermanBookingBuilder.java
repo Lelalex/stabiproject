@@ -76,7 +76,6 @@ public class GermanBookingBuilder extends BookingBuilder {
 		buildHead();
         buildBody();
         buildFooter();
-        germanBooking.accept(visitor, PaymentType.PAYPAL, 2);
         return germanBooking;
 	}
 

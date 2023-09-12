@@ -40,10 +40,10 @@ public class EnglishBooking extends Booking {
 	}
 
 	
-	@Override
-	public void accept(Visitor visitor, PaymentType paymentType, int bookingLanguage) {
-	    visitor.visit(this, paymentType, bookingLanguage);
-	}
+//	@Override
+//	public void accept(Visitor visitor, PaymentType paymentType, int bookingLanguage) {
+//	    visitor.visit(this, paymentType, bookingLanguage);
+//	}
 
 //	@Override
 //	public double getPrice() {
