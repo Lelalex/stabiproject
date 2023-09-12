@@ -24,11 +24,11 @@ public class AuthenticationTest {
         
         // Hinzufügen von Testdaten für NaturalPerson
         Address address = new Address("Test Street", 123, 12345, "Test City");
-        NaturalPerson naturalPerson = new NaturalPerson("Test Name", "user1", "user2", "1", address, "01.01.2000");
+        NaturalPerson naturalPerson = new NaturalPerson("Test Name", "user1", "user2", "N1", address, "01.01.2000");
         dataBase.addTestData(naturalPerson);
         
         // Hinzufügen von Testdaten für LegalPerson (angenommen, dass Sie eine ähnliche Konstruktor für LegalPerson haben)
-        LegalPerson legalPerson = new LegalPerson("compuser", "campname", "comppass", "1", address, "gmbh", "mail");
+        LegalPerson legalPerson = new LegalPerson("compuser", "campname", "comppass", "L1", address, "gmbh", "mail");
 
         dataBase.addTestData(legalPerson);
     

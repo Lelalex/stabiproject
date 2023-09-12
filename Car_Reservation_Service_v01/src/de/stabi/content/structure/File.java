@@ -20,6 +20,9 @@ public class File extends Content {
 		return date.format(new Date(creationDate)) + ".java";
 	}
 
+
+
+
 //
 //    public Booking getBooking() {
 //        return booking;
@@ -28,3 +31,4 @@ public class File extends Content {
 //    public PaymentReceipt getPaymentReceipt() {
 //        return paymentReceipt;
     }
+

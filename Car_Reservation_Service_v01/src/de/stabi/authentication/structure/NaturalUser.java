@@ -1,5 +1,6 @@
 package de.stabi.authentication.structure;
 
+
 import java.util.Scanner;
 
 import de.stabi.authentication.behaviour.AuthenticationService;
@@ -35,14 +36,20 @@ public class NaturalUser extends Subject {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Choose an authentication method:");
+            printSectionHeader("Choose an authentication method");
             System.out.println("1. Username with Password");
             System.out.println("2. Eye Scan");
             System.out.println("3. Finger Print");
             System.out.println("4. Go back to main menu");
+            System.out.print("Your choice: "); // Prompt for user input
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            int choice;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number between 1 and 4.");
+                continue;
+            }
 
             switch (choice) {
                 case 1:
@@ -57,7 +64,7 @@ public class NaturalUser extends Subject {
                 case 4:
                     return false; // Back to main menu
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("[Error] Invalid choice. Please try again.");
                     continue;
             }
 
@@ -66,9 +73,15 @@ public class NaturalUser extends Subject {
                 
                 return true;
             } else {
-                System.out.println("Authentication failed. Please try again.");
+                System.out.println("[Error] Authentication failed. Please try again.");
             }
         }
+    }
+
+    private void printSectionHeader(String headerText) {
+        System.out.println("\n=================");
+        System.out.println("  " + headerText);
+        System.out.println("=================");
     }
 
 }

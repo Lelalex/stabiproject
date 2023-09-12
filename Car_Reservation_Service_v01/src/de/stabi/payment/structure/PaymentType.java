@@ -1,4 +1,4 @@
-package Payment;
+package de.stabi.payment.structure;
 
 public enum PaymentType {
     PAYPAL,

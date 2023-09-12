@@ -18,9 +18,10 @@ public class DataBase {
     public ArrayList<AuthenticationService> Authentications = new ArrayList<>(); 
     public Map<String, Person> Persons = new HashMap<>();
 
-    static int PersonID = 1;
+    static int naturalPersonID = 1;
+    static int legalPersonID = 1;
 
-    private DataBase() {        
+    private DataBase() {
     }
 
     public void printAllPersons() {
@@ -29,19 +30,19 @@ public class DataBase {
         }
     }
 
-    
+
     public void savePerson(NaturalPerson person) { 
-        String personID = "N" + PersonID;  // Hinzufügen eines Präfixes
+        String personID = "N" + naturalPersonID;  // Hinzufügen eines Präfixes
         person.setId(personID);
         this.naturalPersons.put(personID, person);
-        PersonID++; 
+        naturalPersonID++; 
     }
 
     public void savePerson(LegalPerson person) { 
-        String personID = "L" + PersonID;  // Hinzufügen eines Präfixes
+        String personID = "L" + legalPersonID;  // Hinzufügen eines Präfixes
         person.setId(personID);
         this.legalPersons.put(personID, person);
-        PersonID++; 
+        legalPersonID++; 
     }
 
 
@@ -53,7 +54,6 @@ public class DataBase {
         }
         return person;
     }
-    
     
 
     public void addTestData(NaturalPerson person) {

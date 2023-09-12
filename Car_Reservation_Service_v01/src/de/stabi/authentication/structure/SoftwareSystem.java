@@ -32,12 +32,11 @@ public class SoftwareSystem extends Subject {
     }
 
     public boolean executeCredentialType(Person person) {
-        Scanner scanner = new Scanner(System.in);
+    	Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Choose an authentication method:");
+            printSectionHeader("Choose an authentication method");
             System.out.println("1. Username with Password");
-
             System.out.println("2. Go back to main menu");
 
             int choice = scanner.nextInt();
@@ -47,21 +46,26 @@ public class SoftwareSystem extends Subject {
                 case 1:
                     authenticationService.setStrategy(new PasswordStrategy());
                     break;
-            
                 case 2:
                     return false; // Back to main menu
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("[Error] Invalid choice. Please try again.");
                     continue;
             }
 
             authenticationService.authenticateSubject();
             if (authenticationService.isAuthenticated()) {
+                
                 return true;
             } else {
-                System.out.println("Authentication failed. Please try again.");
+                System.out.println("[Error] Authentication failed. Please try again.");
             }
         }
+    }
+    private void printSectionHeader(String headerText) {
+        System.out.println("\n=================");
+        System.out.println("  " + headerText);
+        System.out.println("=================");
     }
 
 }
