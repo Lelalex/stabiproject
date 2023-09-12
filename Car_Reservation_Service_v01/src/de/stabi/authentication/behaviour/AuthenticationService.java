@@ -1,7 +1,5 @@
 package de.stabi.authentication.behaviour;
 
-import java.util.Scanner;
-
 import de.stabi.authentication.structure.LoginStrategy;
 import de.stabi.database.DataBase;
 import de.stabi.person.structure.Person;
