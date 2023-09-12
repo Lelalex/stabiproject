@@ -2,6 +2,9 @@ package de.stabi.payment.behaviour;
 
 import java.util.Scanner;
 
+import de.stabi.booking.behaviour.BookingService;
+import de.stabi.booking.structure.Booking;
+import de.stabi.booking.structure.GermanBooking;
 import de.stabi.payment.structure.Account;
 import de.stabi.payment.structure.CurrencyAmount;
 import de.stabi.payment.structure.GoogleWalletPayment;
@@ -9,12 +12,17 @@ import de.stabi.payment.structure.MobileMoneyWalletPayment;
 import de.stabi.payment.structure.PayPalPayment;
 import de.stabi.payment.structure.PaymentTemplate;
 import de.stabi.payment.structure.PaymentType;
+import de.stabi.statistics.structure.StatisticsVisitor;
 
 public class PaymentService {
 
 	private boolean paymentResult;
+	private PaymentType chosenPaymentType;
+	private BookingService bookingService;
+	private Booking chosenBooking;
+	private int bookingLanguage;
 
-	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount amount, String paymentMethod,
+	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount amount,
 			String email, String password) {
 		Scanner paymentTypescanner = new Scanner(System.in);
 		System.out.println("Please select a payment method (1: PayPal, 2: Google Wallet, 3: Mobile Money Wallet):");
@@ -36,6 +44,7 @@ public class PaymentService {
 			throw new IllegalArgumentException("Unsupported payment type");
 		}
 
+		PaymentType paymentType = type;
 		PaymentTemplate payment;
 		switch (type) {
 		case PAYPAL:
@@ -64,10 +73,15 @@ public class PaymentService {
 		if (verifyCredentials(confirmationMail, confirmationPassword)) {
 			payment.payAmount(senderAccount, receiverAccount, amount);
 			paymentResult = true;
+//			this.chosenPaymentType = paymentType;
+
+			updateStatistics(chosenBooking, paymentType, bookingLanguage);
+			System.out.println("Authentication and Payment was successful!");
 		} else {
 			System.out.println("Authentication failed. Payment not processed.");
 			paymentResult = false;
 		}
+		
 		paymentTypescanner.close();
 	}
 
@@ -84,6 +98,16 @@ public class PaymentService {
 		}
 	}
 
+	public PaymentType getChosenPaymentType() {
+		return chosenPaymentType;
+	}
+	
+	private void updateStatistics(Booking chosenBooking, PaymentType paymentType, int bookingLanguage) {
+        StatisticsVisitor statisticsVisitor = new StatisticsVisitor();
+        
+		//call visitor and pass paymentTest & bookingLanguage
+        statisticsVisitor.visit(chosenBooking, paymentType, bookingLanguage);
+	}
 	public boolean getPaymentResult() {
 		return paymentResult;
 	}

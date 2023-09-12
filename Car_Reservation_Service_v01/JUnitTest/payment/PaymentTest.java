@@ -24,7 +24,7 @@ public class PaymentTest {
 		amount = new CurrencyAmount(12.34, "EUR");
 		senderAccount = new Account("Julian Werner", "werner@gmx.de", 100000);
 		receiverAccount = receiverAccount.getReceiverAccount();
-		paymentService.payAmount(senderAccount, receiverAccount, amount, paymentMethod, email, password);
+		paymentService.payAmount(senderAccount, receiverAccount, amount, paymentMethod, email);
 	}
 
 }

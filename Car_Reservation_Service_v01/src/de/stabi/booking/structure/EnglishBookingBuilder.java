@@ -2,14 +2,21 @@ package de.stabi.booking.structure;
 
 import java.util.Date;
 
+import de.stabi.payment.structure.PaymentType;
 import de.stabi.person.structure.Address;
 import de.stabi.person.structure.Person;
 import de.stabi.ressource.structure.Ressource;
+import de.stabi.statistics.structure.Visitor;
 
 public class EnglishBookingBuilder extends BookingBuilder {
+	
+	private Visitor visitor;
+	private double totalPrice;
 
-	public EnglishBookingBuilder(Person person, Ressource car, int duration) {
+	public EnglishBookingBuilder(Person person, Ressource car, int duration, Visitor visitor, double totalPrice) {
 		super(person, car, duration);
+		this.visitor = visitor;
+		this.totalPrice = totalPrice;
 	}
 
 	private double price;
@@ -23,7 +30,7 @@ public class EnglishBookingBuilder extends BookingBuilder {
 	protected void buildHead() {
 		String name = person.getName();
 		Address address = person.getAddress();
-		String email = person.geteMail();
+//		String email = person.geteMail();
 
 		head.setHead(person.getName(), person.getAddress(), person.geteMail());
 
@@ -47,7 +54,7 @@ public class EnglishBookingBuilder extends BookingBuilder {
 
 	@Override
 	protected void buildFooter() {
-		Double totalPrice = car.getTotalPrice();
+//		Double totalPrice = car.getTotalPrice();
 		footer.setFooter(car);
 		System.out.println("Total price: " + totalPrice + " EUR for the number of " + duration + " day(s).");
 		System.out.println("We accept the following payment options: Paypal, Google Wallet or Money Wallet.");
@@ -61,6 +68,7 @@ public class EnglishBookingBuilder extends BookingBuilder {
 		buildHead();
 		buildBody();
 		buildFooter();
+		englishBooking.accept(visitor, PaymentType.PAYPAL, 2);
 		return englishBooking;
 	}
 

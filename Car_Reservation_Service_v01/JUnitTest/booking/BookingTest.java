@@ -39,15 +39,9 @@ public class BookingTest {
         bookServ = new BookingService();
 //		person = new NaturalPerson();
 //		car = new Car("VW Bus", "LG XX 45", "white", 70.0);
-//        person.setName("John");
         
-//        RessourceService ressourceServ = new RessourceService();
-//        ressourceServ.getSelectedRessource();
-        
-//        bookServ.setPerson(person);
-//        car = car.setRessource(); 
-//        car.getCost(70.0);
-        Booking booking = bookServ.createBooking();
+     	double totalPrice = 900.00;
+        Booking booking = bookServ.createBooking(person, totalPrice);
         Assert.assertNotNull(booking);
     }
 }

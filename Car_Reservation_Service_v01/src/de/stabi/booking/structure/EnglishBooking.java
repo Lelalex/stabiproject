@@ -1,7 +1,7 @@
 package de.stabi.booking.structure;
 
 import de.stabi.payment.structure.PaymentType;
-import de.stabi.statistics.structure.StatisticsVisitor;
+import de.stabi.statistics.structure.Visitor;
 
 public class EnglishBooking extends Booking {
 	private Head head = new Head();
@@ -41,13 +41,13 @@ public class EnglishBooking extends Booking {
 
 	
 	@Override
-	public void accept(StatisticsVisitor visitor, PaymentType paymentType, int bookingLanguage) {
+	public void accept(Visitor visitor, PaymentType paymentType, int bookingLanguage) {
 	    visitor.visit(this, paymentType, bookingLanguage);
 	}
 
-	@Override
-	public double getPrice() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public double getPrice() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 }
