@@ -1,46 +1,106 @@
 package Authentication;
 import java.util.Scanner;
+
 import Database.DataBase;
 import Person.Person;
+
 public abstract class Subject {
-   protected DataBase dataBase = DataBase.getInstance(); // Angenommen, Sie haben eine Singleton-Instanz Ihrer Datenbank
-   protected Person person;
-  
-   public abstract boolean authenticateSubject();
-   public boolean authenticate() {
-       String id = getId();
-       person = dataBase.getPerson(id);
-       if (person == null) {
-           System.out.println("No person found with this ID.");
-           return retry();
-       }
-       return authenticateSubject();
-   }
-   public boolean retry() {
-       Scanner scanner = new Scanner(System.in);
-       while (true) {
-           System.out.println("Invalid ID. Retry (r) or Exit (e)");
-           String retryOrExit = scanner.nextLine();
-           if ("r".equalsIgnoreCase(retryOrExit)) {
-               return authenticate();  // Rekursiver Aufruf von authenticate, um den Prozess neu zu starten
-           } else if ("e".equalsIgnoreCase(retryOrExit)) {
-               return false;
-           } else {
-               System.out.println("Invalid choice. Retry (r) or Exit (e)");
-           }
-       }
-   }
-   public String getId() {
-       Scanner scanner = new Scanner(System.in);
-       System.out.println("Enter ID: ");
-       return scanner.nextLine();
-   }
-   public int getCredentialType() {
-       int credentialType = 0;
-       return credentialType;
-   }
+
+    protected DataBase dataBase = DataBase.getInstance();
+    protected Person person;
+
+    public abstract boolean authenticateSubject();
+
+    public Person getPerson() {
+        return this.person;
+    }
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+    public boolean retry() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println();
+        System.out.print("Invalid input. Would you like to try again? (y/n): ");System.out.println();
+        String response = scanner.nextLine();
+        return response.equalsIgnoreCase("y");
+    }
+
+
+
+    public boolean authenticate() {
+        Scanner scanner = new Scanner(System.in);
+        
+        while(true) {
+            printSectionHeader("Login");
+            
+            System.out.println("Please select the type of person:");
+            System.out.println("(n) Natural Person");
+            System.out.println("(l) Legal Person");
+            System.out.print("> ");
+            String personType = scanner.nextLine().trim().toLowerCase();
+
+            if (!personType.equals("n") && !personType.equals("l")) {
+                System.out.println("[Error] Invalid input. Please enter 'n' for natural person or 'l' for legal person.");
+                continue;
+            }
+
+            if ("n".equalsIgnoreCase(personType)) {
+                printSectionHeader("Natural Person");
+            } else {
+                printSectionHeader("Legal Person");
+            }
+            
+            System.out.print("Please enter your ID: \n> ");
+            String id = scanner.nextLine();
+
+            if ("n".equalsIgnoreCase(personType)) {
+                id = "N" + id;
+            } else if ("l".equalsIgnoreCase(personType)) {
+                id = "L" + id;
+            } else {
+            	System.out.println();
+                System.out.println("Invalid person type. Please retry.");System.out.println();
+                if(!retry()) {
+                    return false;
+                }
+                continue;
+            }
+
+            Person person = dataBase.getPersonById(id, personType);
+            if (person == null) {
+                System.out.println("[Error] No person found with this ID. Please try again.");
+                continue;
+            } 
+
+            // check type of person
+            Subject subject;
+            if ("n".equalsIgnoreCase(personType)) {
+                subject = new NaturalUser();
+            } else if ("l".equalsIgnoreCase(personType)) {
+                subject = new SoftwareSystem();
+            } else {
+            	System.out.println();System.out.println("=====================");
+                System.out.println("Invalid person type. Please retry.");System.out.println();
+                if(!retry()) {
+                    return false;
+                }
+                continue;
+            }
+
+            subject.setPerson(person);
+            boolean success = subject.authenticateSubject();
+            if(success) {
+                System.out.println("[Success] Authentication successful! Welcome back.");
+                return true;
+            } else {
+                System.out.println("[Error] Authentication failed. Please try again.");
+            }
+        }
+    }
+    private void printSectionHeader(String headerText) {
+        System.out.println("\n=================");
+        System.out.println("  " + headerText);
+        System.out.println("=================");
+    }
+
 }
-
-
-
-

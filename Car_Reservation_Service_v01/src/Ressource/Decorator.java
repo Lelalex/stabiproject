@@ -4,16 +4,12 @@ public abstract class Decorator implements Ressource {
 	
 	protected Ressource car;
 	
-	public int ressourcecount = 0;
 	
 	//constructor
 	public Decorator(Ressource car) {
 		this.car = car;	
 	}
 	
-	public int addRessource() {
-		return ressourcecount;
-	}
 	
 	
 	@Override

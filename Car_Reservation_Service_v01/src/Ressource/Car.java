@@ -1,7 +1,9 @@
 package Ressource;
 
-public class Car implements Ressource{
-	
+import java.util.Date;
+
+public class Car implements Ressource {
+
 	private Ressource Car;
 	private String brand;
 	private String license;
@@ -9,6 +11,42 @@ public class Car implements Ressource{
 	private Double price;
 	private String description;
 	
+	private int duration;
+	private Date startDay;
+	
+	public Car(String brand, String license, String colour, double price) {
+		this.brand = brand;
+		this.license = license;
+		this.colour = colour;
+		this.price = price;
+	}
+	
+
+	@Override
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	@Override
+	public int getDuration() {
+		return duration;
+	}
+	
+	@Override
+	public Double getTotalPrice() {
+		return price*duration;
+	}
+
+	@Override
+	public Date getStartDay() {
+		return startDay;
+	}
+
+	@Override
+	public void setStartDay(Date startDay) {
+		this.startDay = startDay;
+	}
+
 
 	public Ressource setRessource() {
 		return Car;
@@ -19,8 +57,6 @@ public class Car implements Ressource{
 		// TODO Auto-generated method stub
 		return Car;
 	}
-	
-
 
 //	public String getBrand() {
 //		brand = "VW";
@@ -44,48 +80,39 @@ public class Car implements Ressource{
 //		return price;
 //	}
 //	
-	
+
 //	public String printDescription() {
 //	System.out.println("You choose the following car configuration: ");
 //	System.out.println("Brand: " + brand);
 //	System.out.println("License: " + license);
 //	System.out.println("Colour: " + colour);
 //	}
-	
-	
+
 	@Override
 	public String getDescription() {
-	    description = "You chose the following car configuration: \r\n" 
-	                + "Brand: " + brand 
-	                + ", License: " + license 
-	                + ", Colour: " + colour;
-	    return description;
+		description = "You chose the following car configuration: \r\n" + "Brand: " + brand + ", License: " + license
+				+ ", Colour: " + colour;
+		return description;
 	}
 
 	@Override
 	public Double getCost() {
-	    return price;
+		return price;
 	}
-	
+
 	@Override
 	public String getLicense() {
-	    return license;
+		return license;
 	}
-	
-	public Car(String brand, String license, String colour, Double price) {
-	    this.brand = brand;
-	    this.license = license;
-	    this.colour = colour;
-	    this.price = price;
-	}
-	
-	
 
-	
 	@Override
 	public String getBrand() {
-	    return brand;
+		return brand;
 	}
 
+	@Override
+	public String toString() {
+		return "Brand: " + brand + ", License: " + license + ", Colour: " + colour;
+	}
 
 }

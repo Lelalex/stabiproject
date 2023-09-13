@@ -1,50 +1,73 @@
 package Booking;
 
+import java.util.Date;
+
+import Person.Address;
 import Person.Person;
-import Ressource.Car;
+import Ressource.Ressource;
+import Statistics.Visitor;
 
 public class EnglishBookingBuilder extends BookingBuilder {
-
-	public EnglishBookingBuilder(Person person, Car car, int duration, String startDay) {
-		super(person, car, duration, startDay);
-	}
 	
+	private Visitor visitor;
+	private double totalPrice;
+
+	public EnglishBookingBuilder(Person person, Ressource car, int duration, Visitor visitor, double totalPrice) {
+		super(person, car, duration);
+		this.visitor = visitor;
+		this.totalPrice = totalPrice;
+	}
+
 	private double price;
 	private Head head = new Head();
 	private Body body = new Body();
 	private Footer footer = new Footer();
 	private EnglishBooking englishBooking = new EnglishBooking();
-	
-	// GermanHead
+	private Date today = new Date();
+
 	@Override
 	protected void buildHead() {
-		head.setHead(person.getName(), person.getAddress(), person.getMail());
+		String name = person.getName();
+		Address address = person.getAddress();
+//		String email = person.geteMail();
+
+		head.setHead(person.getName(), person.getAddress(), person.geteMail());
+
+		System.out.println("======================Your booking=======================");
+		System.out.println("Your contact details: " + name);
+		address.printAddress();
+		System.out.println("\n");
+//		System.out.println("Your mail: " + email + "\n");
 		englishBooking.setHead(head);
 	}
 
-	// GermanBody 
 	@Override
 	protected void buildBody() {
-		body.setBody(car, duration, startDay, car.getCost());
+		int duration = car.getDuration();
+		Date startDay = car.getStartDay();
+		body.setBody(car);
+		System.out.println(car.getDescription());
+		System.out.println("The booking period will be " + duration + " day(s) starting from the " + startDay + "\n" );
 		englishBooking.setBody(body);
-
 	}
 
-	// GermanFooter
 	@Override
 	protected void buildFooter() {
-		price = duration * car.getCost();
-		footer.setFooter(price, "DE123456789");
-		englishBooking.setFooter(footer);
-
+//		Double totalPrice = car.getTotalPrice();
+		footer.setFooter(car);
+		System.out.println("Total price: " + totalPrice + " EUR for the number of " + duration + " day(s).");
+		System.out.println("We accept the following payment options: Paypal, Google Wallet or Money Wallet.");
+		System.out.println("This booking was carried out on " + today + ". Please keep your booking receipt!");
+		System.out.println("Thank you very much for choosing Stabi GmbH!");
+		System.out.println("======================End of booking receipt=======================");
 	}
 
 	@Override
-	protected Booking buildBooking() {
+	public Booking buildBooking() {
 		buildHead();
-        buildBody();
-        buildFooter();
-        return englishBooking;
+		buildBody();
+		buildFooter();
+		return englishBooking;
 	}
 
 }

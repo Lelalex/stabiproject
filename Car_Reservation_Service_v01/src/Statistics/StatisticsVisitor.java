@@ -1,7 +1,6 @@
 package Statistics;
 
 import Booking.Booking;
-import Booking.BookingService;
 import Payment.PaymentType;
 
 public class StatisticsVisitor implements Visitor {
@@ -59,11 +58,13 @@ public class StatisticsVisitor implements Visitor {
 
 	@Override
 	public void displayStatistics() {
+		System.out.println("=======================Statistics ========================");
 		System.out.println("German Booking Paid by PayPal: " + germanPayPalBookings);
 		System.out.println("German Booking Paid by Google Wallet: " + germanGoogleWalletBookings);
 		System.out.println("German Booking Paid by Mobile Wallet: " + germanMobileWalletBookings);
 		System.out.println("English Booking Paid by Google Wallet: " + englishGoogleWalletBookings);
 		System.out.println("English Booking Paid by PayPal: " + englishPayPalBookings);
-		System.out.println("English Booking Paid by Mobile Wallet: " + englishMobileWalletBookings);
+		System.out.println("English Booking Paid by Mobile Wallet: " + englishMobileWalletBookings + "\n");
+		System.out.println("=======================End of Statistics ========================");
 	}
 }

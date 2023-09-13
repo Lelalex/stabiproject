@@ -1,153 +1,111 @@
 package Person;
 
-import java.util.Scanner;
-
-import Booking.Booking;
 import Payment.Account;
 
-
 public class NaturalPerson extends Person {
-    private String dateOfBirth;
+	private String dateOfBirth;
+
 	private String name;
-    private String eMail;
-    private String username;
-    private String password;
-    private String iban;
-    private double balance;
-    private Address address;
-//    private int ID;
-    private Booking booking;
-    private Account bankAccount;
-    
+	private String eMail;
+	private String username;
+	private String password;
+	private double balance;
+	private Address address;
+	private String ID;
+	private Account bankAccount;
 
-//   	public NaturalPerson() {
-//        	super(collectName(), collectID(), collectAddress());
-//        	setSpecificDetails();
-//    	}
-    
-    public NaturalPerson(String name, String id, Address address, String dateOfBirth) {
-    	super(name, id, address);
-    	this.dateOfBirth = dateOfBirth;
-    }
+	public NaturalPerson(String name, String username, String password, String id, Address address, String dateOfBirth) {
+		super(name, username, password, id, address);
+		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.ID = id;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+	}
 
+	
 
+	
+	public String getName() {
+		return name;
+	}
 
-//    public void setID(String personID) {
-//    	this.id = personID;
-//    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-//    	private static String collectID() {
-//        	Scanner scanner = new Scanner(System.in);
-//        	System.out.print("Please enter your ID: ");
-//        	return scanner.nextLine();
-//    	}
+	public String getUsername() {
+		return this.username;
+	}
 
-//    	private static Address collectAddress() {
-//        	Scanner scanner = new Scanner(System.in);
-//        	System.out.println("-- Enter Adress details -- ");
-//        	System.out.print("Please enter your street: ");
-//        	String street = scanner.nextLine();
-//        	System.out.print("Please enter your house number: ");
-//        	int number = scanner.nextInt();
-//        	System.out.print("Please enter your postcode: ");
-//        	int postcode = scanner.nextInt();
-//        	scanner.nextLine(); // consume the remaining newline
-//        	System.out.print("Please enter your city: ");
-//        	String city = scanner.nextLine();
-//        	return new Address(street, number, postcode, city);
-//    	}
-//
-//    	private void setSpecificDetails() {
-//        	Scanner scanner = new Scanner(System.in);
-//        	System.out.print("Please enter your date of birth: ");
-//        	this.dateOfBirth = scanner.nextLine();
-//        	System.out.print("Please enter your email: ");
-//        	this.eMail = scanner.nextLine();
-//    	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getName() {
-   	 return name;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setName(String name) {
-   	 this.name = name;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public Address getAddress() {
-   	 return address;
-    }
+	public String getId() {
+		return this.id;
+	}
 
-    public void setAddress(Address address) {
-   	 this.address = address;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getMail() {
-   	 return eMail;
-    }
+	public Address getAddress() {
+		return address;
+	}
 
-    public void setMail(String eMail) {
-   	 this.eMail = eMail;
-    }
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
-    public String getUserName() {
-   	 return username;
-    }
+	public String geteMail() {
+		return eMail;
+	}
 
-    public void setUserName(String user) {
-   	 this.username = user;
-    }
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
 
-    public String getPassword() {
-   	 return password;
-    }
+	public Account getBankAccount() {
+		return bankAccount;
+	}
 
-    public void setPassword(String password) {
-   	 this.password = password;
-    }
+	public void setBankAccount(Account bankAccount) {
+		this.bankAccount = bankAccount;
+	}
 
-//    public int getID() {
-//   	 return ID;
-//    }
+	public double getBalance() {
+		return balance;
+	}
 
-//    public void setID(int iD) {
-//   	 ID = iD;
-//    }
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	
 
-    public String getIban() {
-   	 return iban;
-    }
+	@Override
+	public void displayInfo() {
+	    System.out.println("\n=================");
+	    System.out.println("  Natural Person Details");
+	    System.out.println("=================");
+	    System.out.println("Name: " + name);
+	    System.out.println("Username: " + username);
+	    System.out.println("Email: " + eMail);
+	    System.out.println("ID: " + ID);
+	    System.out.println("Date of Birth: " + dateOfBirth);
 
-    public void setIban(String iban) {
-   	 this.iban = iban;
-    }
+	    System.out.println("\nAddress:");
+	    address.printAddress();
+	    System.out.println("=================\n");
+	}
 
-    public double getBalance() {
-   	 return balance;
-    }
-
-//    public void setBalance(double balance) {
-//   	 this.balance = balance;
-//    }
-
-    public Booking getBooking() {
-   	 return booking;
-    }
-
-    public void setBooking(Booking booking) {
-   	 this.booking = booking;
-    }
-
-    public Account getBankAccount() {
-   	 return bankAccount;
-    }
-
-    public void setBankAccount(Account bankAccount) {
-   	 this.bankAccount = bankAccount;
-    }
-    @Override
-    public void displayInfo() {
-  	  System.out.println("Natural Person: " + name + ", Address: " + address + ", DOB: " + dateOfBirth);
-    }
 }
-
-

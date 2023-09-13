@@ -1,8 +1,5 @@
 package Booking;
 
-import Payment.PaymentType;
-import Statistics.StatisticsVisitor;
-
 public class EnglishBooking extends Booking {
 	private Head head = new Head();
 	private Body body = new Body();
@@ -39,13 +36,15 @@ public class EnglishBooking extends Booking {
 		return this.footer;
 	}
 
-	@Override
-	public double getPrice() {
-		return footer.getPrice();
-	}
 	
-	@Override
-	public void accept(StatisticsVisitor visitor, PaymentType paymentType, int bookingLanguage) {
-	    visitor.visit(this, paymentType, bookingLanguage);
-	}
+//	@Override
+//	public void accept(Visitor visitor, PaymentType paymentType, int bookingLanguage) {
+//	    visitor.visit(this, paymentType, bookingLanguage);
+//	}
+
+//	@Override
+//	public double getPrice() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 }

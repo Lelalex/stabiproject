@@ -1,29 +1,54 @@
 package Ressource;
 
+import java.util.Date;
+
 public class ChildSeatDecorator extends Decorator {
 
-//	private String size;
+	private int duration;
 
 	//explicit constructor
-	public ChildSeatDecorator(Ressource decorator) {
-		super(decorator);
-		// TODO Auto-generated constructor stub
-	}
-
-	public int addRessource() {
-		ressourcecount++;
-		return ressourcecount;
+	public ChildSeatDecorator(Ressource car) {
+		super(car);
 	}
 	
     @Override
     public String getDescription() {
-        return car.getDescription() + " Extra: Child Seat";
+        return car.getDescription() + ", Extra: Child Seat";
     }
     
+    @Override
+    public Double getCost() {
+        return car.getCost() + 10.0;
+    }
+
 	@Override
-	public Double getCost() {
-		return car.getCost() + 10.0;
+	public int getDuration() {
+		duration = car.getDuration();
+		return duration;
 	}
+
+	@Override
+	public void setDuration(int duration) {
+		this.duration = duration;
+		
+	}
+
+	@Override
+	public Double getTotalPrice() {
+		return car.getCost() * duration + 10.0 * duration;
+	}
+
+	@Override
+	public Date getStartDay() {
+		return car.getStartDay();
+	}
+
+	@Override
+	public void setStartDay(Date startDay) {
+		car.setStartDay(startDay);		
+	}
+}
+
 	
 //	public String getSize() {
 //		size = "baby";
@@ -36,4 +61,4 @@ public class ChildSeatDecorator extends Decorator {
 //		// TODO Auto-generated method stub
 //		return childSeat;
 //	}
-}
+

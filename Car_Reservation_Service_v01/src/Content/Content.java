@@ -2,7 +2,7 @@ package Content;
 
 public abstract class Content {
     protected ContentDetails contentDetails;
-    protected long creationDate;
+    public long creationDate;
 
     public Content(ContentDetails contentDetails) {
         this.contentDetails = contentDetails;

@@ -1,5 +1,7 @@
 package Ressource;
 
+import java.util.Date;
+
 public interface Ressource {
 	
 	/*
@@ -7,7 +9,6 @@ public interface Ressource {
 	 * Fachtypen “Resource”, “Car”, „SetTopBox“ und „ChildSeat“. 
 	 * Verwenden Sie zur Realisierung das Entwurfsmuster „Decorator“.
 	 * 
-	 * Credit: https://www.baeldung.com/java-decorator-pattern
 	 */
 	
 	Ressource setRessource();
@@ -16,5 +17,13 @@ public interface Ressource {
 	String getBrand();
 	String getLicense();
 	String getDescription();
+	
+	public int getDuration();
+	public void setDuration(int duration);
+
+	public Double getTotalPrice();
+
+	public Date getStartDay();
+	public void setStartDay(Date startDay);
 		
 }
