@@ -9,12 +9,10 @@ import Statistics.Visitor;
 
 public class GermanBookingBuilder extends BookingBuilder {
 	
-	private Visitor visitor;
 	private double totalPrice;
 
-	public GermanBookingBuilder(Person person, Ressource car, int duration, Visitor visitor, double totalPrice) {
+	public GermanBookingBuilder(Person person, Ressource car, int duration, double totalPrice) {
 		super(person, car, duration);
-		this.visitor = visitor;
 		this.totalPrice = totalPrice;
 	}
 

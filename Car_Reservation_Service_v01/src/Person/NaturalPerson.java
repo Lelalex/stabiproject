@@ -1,5 +1,6 @@
 package Person;
 
+import Booking.Booking;
 import Payment.Account;
 
 public class NaturalPerson extends Person {
@@ -90,6 +91,17 @@ public class NaturalPerson extends Person {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
+	
+	@Override
+	public Booking getBooking() {
+		return booking;
+	}
+		
+	@Override
+	public void setBooking(Booking booking) {
+		this.booking = booking;		
+	}
+	
 	
 
 	@Override

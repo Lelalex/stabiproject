@@ -2,73 +2,59 @@ package Booking;
 
 import java.util.Scanner;
 
+import Database.DataBase;
 import Person.Person;
-import Person.PersonService;
 import Ressource.Ressource;
-import Ressource.RessourceService;
-import Statistics.StatisticsVisitor;
-import Statistics.Visitor;
 
 public class BookingService {
-	
+
 	private int bookingLanguage;
 	private Booking chosenBooking;
 
-	public Booking createBooking(Person person) {
+	private DataBase db = DataBase.getInstance();
+
+	public void createBooking() {        
+        
+		Scanner personScan = new Scanner(System.in);
+		System.out.println("Please provide your person ID");
+		String id = personScan.next();
+		System.out.println("Are you a natural or legal person? (n/l)");
+		String personType = personScan.next();
+		personScan.close();
 		
-		PersonService personService = new PersonService();
-        RessourceService ressourceService = new RessourceService();
+		//get selected person and car(ressource) with desired addons from database
+		Person person = db.getPersonById(id, personType);
+        Ressource car = db.getSelectedRessource();
         
-        
-		//get selected person and car(ressource) with desired addons
-//        Person person = personService.createPerson();
-        Ressource car = ressourceService.getSelectedRessource();
-        
+        //choose langugage of booking German or English
         int bookingLanguage = chooseBookingLanguage();
         
-//		BookingBuilder bookingBuilder = new BookingBuilder(); 
-//		Date startDay = null; 
 		int duration = car.getDuration();
 		double totalPrice = car.getTotalPrice();
 		
-		Visitor visitor = new StatisticsVisitor();
-
+		Booking Booking;
 		switch (bookingLanguage) {
 		case 1:
-			GermanBookingBuilder germanBuilder = new GermanBookingBuilder(person, car, duration, visitor, totalPrice);
-//			Booking germanBooking = germanBuilder.setPerson(person).setCar(car).buildBooking();
+			GermanBookingBuilder germanBuilder = new GermanBookingBuilder(person, car, duration, totalPrice);
 			Booking germanBooking = germanBuilder.buildBooking();
 			chosenBooking = germanBooking;
-//			System.out.println(germanBooking.getHead());
-			return germanBooking;
+			db.saveBooking(germanBooking);
+			db.saveTotalPrice(totalPrice);
+			person.setBooking(germanBooking);
+//			return germanBooking;
+			break;
 		case 2:
-			EnglishBookingBuilder englishBuilder = new EnglishBookingBuilder(person, car, duration, visitor, totalPrice);
-//			englishBuilder.setPerson(person);
-//			englishBuilder.setCar(car);
-//			englishBuilder.setDuration(duration);
+			EnglishBookingBuilder englishBuilder = new EnglishBookingBuilder(person, car, duration, totalPrice);
 			Booking englishBooking = englishBuilder.buildBooking();
-			chosenBooking = englishBooking;
-//			System.out.println(englishBooking.getHead());
-			return englishBooking;
+			db.saveBooking(englishBooking);
+			db.saveTotalPrice(totalPrice);
+			person.setBooking(englishBooking);
+//			return englishBooking;
+			break;
 		default:
 			System.out.println("Invalid Entry. Wählen Sie zur Buchung 1 für Deutsch / Choose 2 to book in English.");
-			return null;
+			break;
 		}
-
-//        Booking booking = bookingBuilder
-//        		.setPerson(person)
-//        		.setCar(car)
-//        		.setDuration(duration)
-//        		.setStartDay(startDay)
-//        		.buildBooking();        
-
-
-//		if (booking != null) {
-//			System.out.println(booking.getHead());
-//		}
-//
-//		System.out.println(booking.getHead());
-//		return booking;
 	}
 
 	public int chooseBookingLanguage() {
@@ -79,11 +65,11 @@ public class BookingService {
 
 		return bookingLanguage;
 	}
-	
+
 	public int getBookingLanguage() {
-        return bookingLanguage;
-    }
-	
+		return bookingLanguage;
+	}
+
 	public Booking getChosenBooking() {
 		return chosenBooking;
 	}

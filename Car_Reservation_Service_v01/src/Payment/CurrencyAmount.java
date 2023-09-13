@@ -17,5 +17,4 @@ public class CurrencyAmount {
         return currency;
     }
 
-    // Setter, falls erforderlich
 }

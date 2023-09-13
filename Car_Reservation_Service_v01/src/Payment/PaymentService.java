@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import Booking.Booking;
 import Booking.BookingService;
+import Database.DataBase;
+import Person.Person;
 import Statistics.StatisticsVisitor;
 
 public class PaymentService {
@@ -13,9 +15,20 @@ public class PaymentService {
 	private BookingService bookingService;
 	private Booking chosenBooking;
 	private int bookingLanguage;
+	private DataBase db = DataBase.getInstance();
 
-	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount amount,
-			String email, String password) {
+	public void payAmount() {
+		
+		Person person = db.getPerson(null);
+		Booking booking = db.getBooking();
+		double totalPrice = db.getTotalPrice();
+		
+		Account senderAccount = new Account("1", person.getName(), 100000);
+		Account receiverAccount = Account.getReceiverAccount();
+		CurrencyAmount amount = new CurrencyAmount(totalPrice, "EUR");
+		String email = person.geteMail();
+		String password = person.getPassword();
+		
 		Scanner paymentTypescanner = new Scanner(System.in);
 		System.out.println("Please select a payment method (1: PayPal, 2: Google Wallet, 3: Mobile Money Wallet):");
 
@@ -42,14 +55,17 @@ public class PaymentService {
 		case PAYPAL:
 			payment = new PayPalPayment();
 			System.out.println("Choosing PayPal as payment method...");
+			db.savePayment(paymentType, payment);
 			break;
 		case GOOGLE_WALLET:
 			payment = new GoogleWalletPayment();
 			System.out.println("Choosing Google Wallet as payment method...");
+			db.savePayment(paymentType, payment);
 			break;
 		case MOBILE_MONEY_WALLET:
 			payment = new MobileMoneyWalletPayment();
 			System.out.println("Choosing Mobile Money Wallet as payment method...");
+			db.savePayment(paymentType, payment);
 			break;
 		default:
 			throw new IllegalArgumentException("Unsupported payment type");
@@ -60,12 +76,10 @@ public class PaymentService {
 		System.out.println("Please enter your password:");
 		String confirmationPassword = paymentTypescanner.next();
 
-//        boolean authenticationResult = verifyCredentials(email, password, false);
 
 		if (verifyCredentials(confirmationMail, confirmationPassword)) {
 			payment.payAmount(senderAccount, receiverAccount, amount);
 			paymentResult = true;
-//			this.chosenPaymentType = paymentType;
 
 			updateStatistics(chosenBooking, paymentType, bookingLanguage);
 			System.out.println("Authentication and Payment was successful!");
@@ -90,11 +104,7 @@ public class PaymentService {
 		}
 	}
 
-	public PaymentType getChosenPaymentType() {
-		return chosenPaymentType;
-	}
-	
-	private void updateStatistics(Booking chosenBooking, PaymentType paymentType, int bookingLanguage) {
+	private void updateStatistics(Booking booking, PaymentType paymentType, int bookingLanguage) {
         StatisticsVisitor statisticsVisitor = new StatisticsVisitor();
         
 		//call visitor and pass paymentTest & bookingLanguage

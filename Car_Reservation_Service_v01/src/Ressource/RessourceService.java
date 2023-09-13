@@ -5,9 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import Database.DataBase;
+
 public class RessourceService {
 
 	private Ressource car;
+	private DataBase db = DataBase.getInstance(); 
 
 	public Ressource getSelectedRessource() {
 		car = chooseCarType();
@@ -17,6 +20,7 @@ public class RessourceService {
 		car = chooseWifi(car);
 
 		System.out.println(car.getDescription());
+		db.saveSelectedRessource(car);
 		return car;
 	}
 

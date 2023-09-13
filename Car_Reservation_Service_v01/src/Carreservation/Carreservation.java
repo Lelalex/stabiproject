@@ -22,6 +22,8 @@ import Statistics.Visitor;
 public class Carreservation {
 
 	private static double totalPrice;
+	private static Booking chosenBooking;
+	private static int chosenbookingLanguage;
 
 	public static void main(String[] args) {
 
@@ -37,7 +39,6 @@ public class Carreservation {
 		// create the visitor for statistics
 		Visitor visitor = new StatisticsVisitor();
 
-		Booking chosenBooking = null;
 
 //        double totalPrice = 0.0;
 		Person person = null;
@@ -80,6 +81,10 @@ public class Carreservation {
 				break;
 			case 3:
 				Booking booking = bookingService.createBooking(person);
+				booking = bookingService.getChosenBooking();
+				setchosenBooking(booking);
+				chosenbookingLanguage = bookingService.getBookingLanguage();
+				setbookingLanguage(chosenbookingLanguage);
 //                    System.out.println(booking.getHead());
 				break;
 			case 4:
@@ -116,6 +121,7 @@ public class Carreservation {
 				break;
 			case 0:
 				System.out.println("Exiting the program!");
+				System.exit(0);
 				break;
 			default:
 				System.out.println("Invalid choice. Please select a valid option.");
@@ -124,6 +130,16 @@ public class Carreservation {
 		} while (chosenService != 0);
 
 		serviceChoiceScan.close();
+	}
+
+	public  static void setbookingLanguage(int bookingLanguage) {
+		chosenbookingLanguage = bookingLanguage;
+		
+	}
+
+	public static void setchosenBooking(Booking booking) {
+		chosenBooking = booking;
+		
 	}
 
 	public static void settotalPrice(double price) {

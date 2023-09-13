@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Authentication.AuthenticationService;
+import Booking.Booking;
+import Payment.PaymentTemplate;
+import Payment.PaymentType;
 import Person.LegalPerson;
 import Person.NaturalPerson;
 import Person.Person;
+import Ressource.Ressource;
 
 public class DataBase {
 
@@ -17,6 +21,11 @@ public class DataBase {
     public Map<String, LegalPerson> legalPersons = new HashMap<>();
     public ArrayList<AuthenticationService> Authentications = new ArrayList<>(); 
     public Map<String, Person> Persons = new HashMap<>();
+
+	private ArrayList<Ressource> SelectedRessources = new ArrayList<Ressource>();
+	private ArrayList<Booking> Bookings = new ArrayList<Booking>();
+	private ArrayList<Double> BookingPrices = new ArrayList<Double>();
+	public Map<PaymentType, PaymentTemplate> Payments = new HashMap<PaymentType, PaymentTemplate>();
 
     static int naturalPersonID = 1;
     static int legalPersonID = 1;
@@ -75,6 +84,7 @@ public class DataBase {
     public static DataBase getInstance() {
         if(dbEntry == null) {
             dbEntry = new DataBase();
+            return dbEntry;
         }
         return dbEntry;
     }
@@ -120,7 +130,37 @@ public class DataBase {
             System.out.println("No person found with this ID.");
         }
     }
+
+	public void saveSelectedRessource(Ressource car) {
+		this.SelectedRessources.add(car);		
+	}
+	
+	public Ressource getSelectedRessource() {
+		return this.SelectedRessources.get(SelectedRessources.size()-1);
+	}
+	
+	public void saveBooking(Booking booking) {
+		this.Bookings.add(booking);		
+	}
+	
+	public Booking getBooking() {
+		return this.Bookings.get(Bookings.size()-1);
+	}
     
+    public void saveTotalPrice(double totalPrice) {
+    	this.BookingPrices.add(totalPrice);
+    }
     
+    public double getTotalPrice() {
+    	return this.BookingPrices.get(BookingPrices.size()-1);
+    }
+
+	public void savePayment(PaymentType paymentType, PaymentTemplate payment) {
+		this.Payments.put(paymentType, payment);		
+	}
+	
+	public PaymentTemplate getPayment(PaymentType paymentType) {
+		return this.Payments.get(paymentType);
+	}
 
 }

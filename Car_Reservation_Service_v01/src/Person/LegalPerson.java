@@ -2,6 +2,7 @@ package Person;
 
 import java.util.Scanner;
 
+import Booking.Booking;
 import Payment.Account;
 
 public class LegalPerson extends Person {
@@ -102,6 +103,17 @@ public class LegalPerson extends Person {
 		this.balance = balance;
 	
     }
+	
+	@Override
+	public Booking getBooking() {
+		return booking;
+	}
+		
+	@Override
+	public void setBooking(Booking booking) {
+		this.booking = booking;		
+	}
+	
 	@Override
 	public void displayInfo() {
 	    System.out.println("\n=================");
@@ -116,4 +128,8 @@ public class LegalPerson extends Person {
 	    address.printAddress();
 	    System.out.println("=================\n");
 	}
+
+
+
+
 }

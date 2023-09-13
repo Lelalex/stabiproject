@@ -42,7 +42,7 @@ public class BookingTest {
 //		car = new Car("VW Bus", "LG XX 45", "white", 70.0);
         
      	double totalPrice = 900.00;
-        Booking booking = bookServ.createBooking(person);
+        bookServ.createBooking();
         Assert.assertNotNull(booking);
     }
 }

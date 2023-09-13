@@ -1,5 +1,6 @@
 package Person;
 
+import Booking.Booking;
 import Payment.Account;
 
 public abstract class Person {
@@ -10,6 +11,7 @@ public abstract class Person {
 	protected String id;
 	protected Address address;
 	protected String eMail;
+	protected Booking booking;
 	private double balance;
 
 	public Person(String name, String username, String password, String id, Address address) {
@@ -64,5 +66,9 @@ public abstract class Person {
 	public abstract double getBalance();
 
 	public abstract void setBalance(double balance);
+	
+	public abstract Booking getBooking();
+
+	public abstract void setBooking(Booking booking);
 
 }

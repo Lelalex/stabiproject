@@ -19,10 +19,6 @@ public class StatisticsService {
 		}
 	}
 
-	public void displayStatistics() {
-		visitor.displayStatistics();
-	}
-
 	public int getGermanBookingsPaidBy(PaymentType paymentType) {
 		if (paymentType == PaymentType.PAYPAL) {
 			return visitor.getGermanBookingsPaidByPaypal();
@@ -45,6 +41,17 @@ public class StatisticsService {
 		} else {
 			return 0;
 		}
+	}
+	
+	public void displayStatistics() {
+		System.out.println("=======================Statistics ========================");
+		System.out.println("German Booking Paid by PayPal: " + germanPayPalBookings);
+		System.out.println("German Booking Paid by Google Wallet: " + germanGoogleWalletBookings);
+		System.out.println("German Booking Paid by Mobile Wallet: " + germanMobileWalletBookings);
+		System.out.println("English Booking Paid by Google Wallet: " + englishGoogleWalletBookings);
+		System.out.println("English Booking Paid by PayPal: " + englishPayPalBookings);
+		System.out.println("English Booking Paid by Mobile Wallet: " + englishMobileWalletBookings + "\n");
+		System.out.println("=======================End of Statistics ========================");
 	}
 
 }
